@@ -12,10 +12,10 @@
     <table>
         <tr>
 
-            <th ><button onclick="Menu_film()">Film <select id="film""><option>Lire</option><option>Supprimer</option></select></button></th>
-            <th ><button onclick="Menu_artiste()">Artiste<select id="artiste"><option>Lire</option><option>Supprimer</option></select></button></th>
-            <th ><button onclick="Menu_genre()">Genre<select id="genre"><option>Lire</option><option>Supprimer</option></select></button></th>
-            <th ><button onclick="Menu_internautes()">Internautes<select id="internautes"><option>Lire</option><option>Supprimer</option></select></button></th>
+            <th ><button onclick="Menu_film()">Film <select id="film""><option>Lire</option><option>Supprimer</option><option>Ajout</option><option>Modifier</option></select></button></th>
+            <th ><button onclick="Menu_artiste()">Artiste<select id="artiste"><option>Lire</option><option>Supprimer</option><option>Ajout</option><option>Modifier</option></select></button></th>
+            <th ><button onclick="Menu_genre()">Genre<select id="genre"><option>Lire</option><option>Supprimer</option><option>Ajout</option><option>Modifier</option></select></button></th>
+            <th ><button onclick="Menu_internautes()">Internautes<select id="internautes"><option>Lire</option><option>Supprimer</option><option>Modifier</option></select></button></th>
             <th ><button onclick="">Profil</button></th>
         </tr>
     </table>
@@ -47,7 +47,7 @@ while($donnee = $rep->fetch())
     echo '<td>'.$donnee['nom'].'</td>';
     echo '<td>'.$donnee['prenom'].'</td>';
     echo '<td>'.$donnee['annee'].'</td>';
-    echo '<td><button style="display: none">X</button></td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idFilm'].'&genre=film"><button style="display: none">X</button></a></td>';
     echo '</tr>';
 }
 echo'</table>';
@@ -72,7 +72,7 @@ while($donnee = $rep->fetch())
     echo '<td>'.$donnee['nom'].'</td>';
     echo '<td>'.$donnee['prenom'].'</td>';
     echo '<td>'.$donnee['dateNaiss'].'</td>';
-    echo '<td><button style="display: none">X</button></td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idArtiste'].'&genre=artiste"><button style="display: none">X</button></a></td>';
     echo '</tr>';
 }
 echo'</table>';
@@ -93,7 +93,7 @@ while($donnee = $rep->fetch())
 {
     echo '<tr>';
     echo '<td>'.$donnee['libelle'].'</td>';
-    echo '<td><button style="display: none">X</button></td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idGenre'].'&genre=genre"><button style="display: none">X</button></a></td>';
     echo '</tr>';
 }
 echo'</table>';
@@ -116,7 +116,7 @@ while($donnee = $rep->fetch())
     echo '<tr>';
     echo '<td>'.$donnee['nom'].'</td>';
     echo '<td>'.$donnee['Prenom'].'</td>';
-    echo '<td><button style="display: none">X</button></td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internaute"><button style="display: none">X</button></a></td>';
     echo '</tr>';
 }
 echo'</table>';
@@ -125,7 +125,7 @@ echo'</table>';
 
 <script>
     function Menu_film() {
-        if(document.getElementById("film").value=="Lire"){
+        if(document.getElementById("film").value==="Lire"){
         document.getElementById("table_film").setAttribute("style","display:block");
             for(let i=5;i<document.getElementsByTagName('button').length;i++)
                 document.getElementsByTagName('button')[i].setAttribute("style","display:none");
@@ -133,7 +133,7 @@ echo'</table>';
         document.getElementById("table_genre").setAttribute("style","display:none");
         document.getElementById("table_internautes").setAttribute("style","display:none");
         }
-        if(document.getElementById("film").value=="Supprimer"){
+        if(document.getElementById("film").value==="Supprimer"){
             document.getElementById("table_film").setAttribute("style","display:block");
             for(let i=5;i<document.getElementsByTagName('button').length;i++)
             document.getElementsByTagName('button')[i].setAttribute("style","display:block");
@@ -168,7 +168,7 @@ echo'</table>';
             document.getElementById("table_genre").setAttribute("style","display:block");
             document.getElementById("table_internautes").setAttribute("style","display:none");
         }
-        if(document.getElementById("genre").value=="Supprimer"){
+        if(document.getElementById("genre").value==="Supprimer"){
             document.getElementById("table_film").setAttribute("style","display:none");
             for(let i=5;i<document.getElementsByTagName('button').length;i++)
                 document.getElementsByTagName('button')[i].setAttribute("style","display:block");
@@ -178,7 +178,7 @@ echo'</table>';
         }
     }
     function Menu_internautes() {
-        if(document.getElementById("internautes").value=="Lire"){
+        if(document.getElementById("internautes").value==="Lire"){
             document.getElementById("table_film").setAttribute("style","display:none");
             for(let i=5;i<document.getElementsByTagName('button').length;i++)
                 document.getElementsByTagName('button')[i].setAttribute("style","display:none");
@@ -186,7 +186,7 @@ echo'</table>';
             document.getElementById("table_genre").setAttribute("style","display:none");
             document.getElementById("table_internautes").setAttribute("style","display:block");
         }
-        if(document.getElementById("internautes").value=="Supprimer"){
+        if(document.getElementById("internautes").value==="Supprimer"){
             document.getElementById("table_film").setAttribute("style","display:none");
             for(let i=5;i<document.getElementsByTagName('button').length;i++)
                 document.getElementsByTagName('button')[i].setAttribute("style","display:block");
