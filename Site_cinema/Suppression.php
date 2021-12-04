@@ -30,6 +30,9 @@ if($genre=="genre"){
         die('Erreur de connexion : ' . $e->getMessage());
     }
     //preparation de la requête avec les variables $_POST du formulaire
+    $requete = $bdd->prepare('DELETE FROM film WHERE (Genre_idGenre = ?);');
+    $requete->execute([$id]) or die(print_r($requete->errorInfo()));
+
     $req = $bdd->prepare('DELETE FROM genre WHERE (idGenre = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
 }
