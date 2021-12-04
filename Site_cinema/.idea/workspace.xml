@@ -23,7 +23,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="PhpServers">
+    <servers>
+      <server host="github/" id="91937853-e82b-4110-8a74-d059eea0cd9a" name="cinema" />
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="WAMP PHP" />
   <component name="ProjectId" id="21e2YvSmkGe5eZDTh8AbG8t1Ke1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -50,6 +55,11 @@
       <recent name="C:\Users\Florian\Documents\GitHub\Site-Film\Site_cinema\Site_cinema\php task" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Cinema" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="cinema" start_url="/Site-Film/Site_cinema">
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,6 +76,7 @@
       <workItem from="1638630614414" duration="1659000" />
       <workItem from="1638645810159" duration="7000" />
       <workItem from="1638645900447" duration="184000" />
+      <workItem from="1638647360916" duration="855000" />
     </task>
     <servers />
   </component>
