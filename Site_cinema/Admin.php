@@ -142,7 +142,7 @@ while($donnee = $rep->fetch())
 {
     echo '<tr>';
     echo '<td>'.$donnee['nom'].'</td>';
-    echo '<td>'.$donnee['Prenom'].'</td>';
+    echo '<td>'.$donnee['prenom'].'</td>';
     echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internaute"><button style="display: none">X</button></a></td>';
     echo '<td><a href="Modification.php?id='.$donnee['idInternaute'].'&genre=internaute" class="mod" style="display: none">Modifier</a></td>';
     echo '</tr>';
