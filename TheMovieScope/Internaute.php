@@ -1,7 +1,7 @@
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Internaute </title>
+    <meta charset="UTF-8-UNICODE">
+    <title>Internaute</title>
 </head>
 <body>
 <div id="logo">
@@ -11,11 +11,10 @@
 <div>
     <table>
         <tr>
-            <th ><button onclick="Menu_film()">Film</button></th>
-            <th ><button onclick="Menu_artiste()">Artiste</button></th>
-            <th ><button onclick="Menu_film()">Genre</button></th>
-            <th ><button onclick="Menu_film()">Internautes</button></th>
-            <th ><button onclick="Menu_film()">Profil</button></th>
+
+            <th><button onclick="Menu_film()" id="film">Film</button></th>
+            <th><button onclick="Menu_artiste()" id="artiste">Artiste</button></th>
+            <th><button onclick="">Profil</button></th>
         </tr>
     </table>
 </div>
@@ -26,9 +25,9 @@ echo'<table id="table_film" style="display: none">
     <tr>
         <th>TITRE</th>
         <th>GENRE</th>
-        <th>NOM DU RÉALISATEUR</th>
-        <th>PRÉNOM DU RÉALISATEUR</th>
+        <th>RÉALISATEUR</th>
         <th>DATE DE SORTIE</th>
+        <th>RESUME</th>
     </tr>';
 
 try{
@@ -42,9 +41,10 @@ while($donnee = $rep->fetch())
     echo '<tr>';
     echo '<td>'.$donnee['titre'].'</td>';
     echo '<td>'.$donnee['libelle'].'</td>';
-    echo '<td>'.$donnee['nom'].'</td>';
-    echo '<td>'.$donnee['prenom'].'</td>';
+    echo '<td>'.$donnee['prenom']." ".$donnee['nom'].'</td>';
     echo '<td>'.$donnee['annee'].'</td>';
+    echo '<td>'.utf8_encode($donnee['resume']).'</td>';
+    echo '<td><a href="InternauteModif.php?id='.$donnee['idFilm'].'&film='.$donnee['titre'].'&genre=film&date='.$donnee['annee'].'&type='.$donnee['libelle'].'&artiste='.$donnee['prenom']." ".$donnee['nom'].'&resume='.urlencode($donnee['resume']).'"><button>Modifier</button></a></td>';
     echo '</tr>';
 }
 echo'</table>';
@@ -52,8 +52,8 @@ echo'</table>';
 //Requete pour afficher les artistes
 echo'<table id="table_artiste" style="display: none">
     <tr>
-        <th>NOM DU RÉALISATEUR</th>
-        <th>PRÉNOM DU RÉALISATEUR</th>
+        <th>NOM</th>
+        <th>PRÉNOM</th>
         <th>DATE DE NAISSANCE</th>
     </tr>';
 
@@ -72,17 +72,25 @@ while($donnee = $rep->fetch())
     echo '</tr>';
 }
 echo'</table>';
-?>
 
-    <script>
-        function Menu_film() {
+?>
+<script>
+    function Menu_film() {
+        if(document.getElementById("film")){
             document.getElementById("table_film").setAttribute("style","display:block");
             document.getElementById("table_artiste").setAttribute("style","display:none");
+            document.getElementById("table_genre").setAttribute("style","display:none");
+            document.getElementById("table_internautes").setAttribute("style","display:none");
         }
-        function Menu_artiste() {
-            document.getElementById("table_film").setAttribute("style","display:none");
+    }
+    function Menu_artiste() {
+        if(document.getElementById("artiste")){
             document.getElementById("table_artiste").setAttribute("style","display:block");
+            document.getElementById("table_film").setAttribute("style","display:none");
+            document.getElementById("table_genre").setAttribute("style","display:none");
+            document.getElementById("table_internautes").setAttribute("style","display:none");
         }
-    </script>
+    }
 
+</script>
 </body>
