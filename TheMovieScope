@@ -1,1 +1,931 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8-UNICODE">
+    <title>Admin</title>
+</head>
+<body>
+<div id="logo">
+    <img src="">
+    <h1>Nom du site</h1>
+</div>
+<div>
+    <table>
+        <tr>
 
+            <th ><button onclick="Menu_film()">Film <select id="film""><option>Lire</option><option>Ajout</option></select></button></th>
+            <th ><button onclick="Menu_artiste()">Artiste<select id="artiste"><option>Lire</option><option>Ajout</option></select></button></th>
+            <th ><button onclick="Menu_genre()">Genre<select id="genre"><option>Lire</option><option>Ajout</option></select></button></th>
+            <th ><button onclick="Menu_internautes()">Internautes</button></th>
+            <th ><button onclick="">Profil</button></th>
+        </tr>
+    </table>
+</div>
+<?php
+session_start();
+//Requete pour afficher les films
+echo'<table id="table_film" style="display: none">
+    <tr>
+        <th>TITRE</th>
+        <th>GENRE</th>
+        <th>RÉALISATEUR</th>
+        <th>DATE DE SORTIE</th>
+        <th>RESUME</th>
+    </tr>';
+
+try{
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+    die('Erreur de connexion : '.$e->getMessage());}
+$rep = $bdd->query('SELECT * FROM cinema.film INNER JOIN cinema.genre ON film.Genre_idGenre = genre.idGenre INNER JOIN cinema.artiste ON film.Artiste_idRealisateur=artiste.idArtiste;');
+while($donnee = $rep->fetch())
+{
+    echo '<tr>';
+    echo '<td>'.$donnee['titre'].'</td>';
+    echo '<td>'.$donnee['libelle'].'</td>';
+    echo '<td>'.$donnee['prenom']." ".$donnee['nom'].'</td>';
+    echo '<td>'.$donnee['annee'].'</td>';
+    echo '<td>'.utf8_encode($donnee['resume']).'</td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idFilm'].'&genre=film"><button >Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idFilm'].'&film='.$donnee['titre'].'&genre=film&date='.$donnee['annee'].'&type='.$donnee['libelle'].'&artiste='.$donnee['prenom']." ".$donnee['nom'].'&resume='.urlencode($donnee['resume']).'"><button>Modifier</button></a></td>';
+    echo '</tr>';
+}
+echo'</table>';
+
+//Requete pour afficher les artistes
+echo'<table id="table_artiste" style="display: none">
+    <tr>
+        <th>NOM</th>
+        <th>PRÉNOM</th>
+        <th>DATE DE NAISSANCE</th>
+    </tr>';
+
+try{
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+    die('Erreur de connexion : '.$e->getMessage());}
+$rep = $bdd->query('SELECT * FROM cinema.artiste;');
+while($donnee = $rep->fetch())
+{
+    echo '<tr>';
+    echo '<td>'.$donnee['nom'].'</td>';
+    echo '<td>'.$donnee['prenom'].'</td>';
+    echo '<td>'.$donnee['dateNaiss'].'</td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idArtiste'].'&genre=artiste"><button>Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idArtiste'].'&genre=artiste&nom='.$donnee['nom'].'&prenom='.$donnee['prenom'].'&date='.$donnee['dateNaiss'].'"><button>Modifier</button></a></td>';
+    echo '</tr>';
+}
+echo'</table>';
+
+//Requete pour afficher les genres
+echo'<table id="table_genre" style="display: none">
+    <tr>
+        <th>LIBELLE</th>
+    </tr>';
+
+try{
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+    die('Erreur de connexion : '.$e->getMessage());}
+$rep = $bdd->query('SELECT * FROM cinema.genre;');
+while($donnee = $rep->fetch())
+{
+    echo '<tr>';
+    echo '<td>'.$donnee['libelle'].'</td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idGenre'].'&genre=genre"><button>Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idGenre'].'&genre=genre&libelle='.$donnee['libelle'].'"><button>Modifier</button></a></td>';
+    echo '</tr>';
+}
+echo'</table>';
+
+//Requete pour afficher les internautes
+echo'<table id="table_internautes" style="display: none">
+    <tr>
+        <th>NOM</th>
+        <th>PRENOM</th>
+        <th>ADMIN</th>
+    </tr>';
+
+try{
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+    die('Erreur de connexion : '.$e->getMessage());}
+$rep = $bdd->query('SELECT * FROM cinema.internaute;');
+while($donnee = $rep->fetch())
+{
+    echo '<tr>';
+    echo '<td>'.$donnee['nom'].'</td>';
+    echo '<td>'.$donnee['prenom'].'</td>';
+    echo '<td>'.$donnee['admin'].'</td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internaute"><button>Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idInternaute'].'&genre=internaute"><button>Modifier</button></a></td>';
+    echo '</tr>';
+}
+echo'</table>';
+
+?>
+<script>
+    function Menu_film() {
+        if(document.getElementById("film").value==="Lire"){
+        document.getElementById("table_film").setAttribute("style","display:block");
+        document.getElementById("table_artiste").setAttribute("style","display:none");
+        document.getElementById("table_genre").setAttribute("style","display:none");
+        document.getElementById("table_internautes").setAttribute("style","display:none");
+        }
+        if(document.getElementById("film").value==="Ajout"){
+            window.location = "Ajout.php?action=film";
+        }
+    }
+    function Menu_artiste() {
+        if(document.getElementById("artiste").value==="Lire"){
+            document.getElementById("table_artiste").setAttribute("style","display:block");
+            document.getElementById("table_film").setAttribute("style","display:none");
+            document.getElementById("table_genre").setAttribute("style","display:none");
+            document.getElementById("table_internautes").setAttribute("style","display:none");
+        }
+        if(document.getElementById("artiste").value==="Ajout"){
+            window.location = "Ajout.php?action=artiste";
+        }
+    }
+    function Menu_genre() {
+        if(document.getElementById("genre").value==="Lire"){
+            document.getElementById("table_genre").setAttribute("style","display:block");
+            document.getElementById("table_film").setAttribute("style","display:none");
+            document.getElementById("table_artiste").setAttribute("style","display:none");
+            document.getElementById("table_internautes").setAttribute("style","display:none");
+        }
+        if(document.getElementById("genre").value==="Ajout"){
+            window.location = "Ajout.php?action=genre";
+        }
+    }
+    function Menu_internautes() {
+            document.getElementById("table_internautes").setAttribute("style","display:block");
+            document.getElementById("table_film").setAttribute("style","display:none");
+            document.getElementById("table_artiste").setAttribute("style","display:none");
+            document.getElementById("table_genre").setAttribute("style","display:none");
+    }
+</script>
+</body>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nom du site</title>
+</head>
+
+<body>
+<a href="Admin.php">Retour</a>
+<?php
+if($_GET['action']==="film"){echo '<div>
+    <form action="Ajout.php?action=film" method="post">
+        <table>
+            <tr>
+                <td><label>Titre</label></td> <td><input type="text" name="titre"/></td>
+            </tr>
+            <tr>
+                <td><label>Annee</label></td> <td><input type="text" name="annee"/></td>
+            </tr>
+            <tr>
+                <td><label>Genre</label></td>
+                <td ><select name="genre">';
+
+    try{
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+    }
+    catch(Exception $e){
+        die('Erreur de connexion : '.$e->getMessage());}
+    $rep = $bdd->query('SELECT * FROM cinema.genre;');
+    while($donnee = $rep->fetch())
+    {
+        echo('<option name="genre" value="'.$donnee['idGenre'].'">'.$donnee['libelle'].'</option>');
+    }
+    echo'</select></td>
+            </tr>
+
+            <tr>
+                <td><label>Artiste</label></td>
+                <td ><select name="artiste">';
+
+    try{
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+    }
+    catch(Exception $e){
+        die('Erreur de connexion : '.$e->getMessage());}
+    $rep = $bdd->query('SELECT * FROM cinema.artiste;');
+    while($donnee = $rep->fetch())
+    {
+        echo('<option name="artiste" value="'.$donnee['idArtiste'].'">'.$donnee['prenom'].' '.$donnee['nom'].'</option>');
+    }
+    echo'</select></td>
+            </tr>
+                <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
+            </tr>
+        </table>
+    </form>
+</div></body></html>';
+    if(isset($_POST['titre'])&&isset($_POST['annee'])){
+        $titre=$_POST['titre'];
+        $annee=$_POST['annee'];
+        $Artiste=$_POST['artiste'];;
+        $Genre=$_POST['genre'];
+        if($titre!=""||$annee!=""){
+            try {
+                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+            } catch (Exception $e) {
+                die('Erreur de connexion : ' . $e->getMessage());
+            }
+//preparation de la requête avec les variables $_POST du formulaire
+            $req = $bdd->prepare('INSERT INTO film (titre, annee, Artiste_idRealisateur, Genre_idGenre) VALUES (?,?, ?,?);');
+            $req->execute([$titre,$annee,$Artiste,$Genre]) or die(print_r($req->errorInfo()));
+            header('Location: Admin.php');
+        }
+    }
+}
+
+if($_GET['action']==="genre"){echo'
+<div>
+    <form action="Ajout.php?action=genre" method="post">
+        <table>
+            <tr>
+                <td><label>Libelle</label></td>
+                <td ><input name="libelle"></td>
+            </tr>
+                <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
+            </tr>
+        </table>
+    </form>
+</div></body></html>';
+if(isset($_POST['libelle'])){
+        $libelle=$_POST['libelle'];
+            try {
+                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+            } catch (Exception $e) {
+                die('Erreur de connexion : ' . $e->getMessage());
+            }
+//preparation de la requête avec les variables $_POST du formulaire
+            $req = $bdd->prepare('INSERT INTO genre (libelle) VALUES (?);');
+            $req->execute([$libelle]) or die(print_r($req->errorInfo()));
+            header('Location: Admin.php');}
+}
+
+if($_GET['action']==="artiste"){echo'<div>
+    <form action="Ajout.php?action=artiste" method="post">
+        <table>
+            <tr>
+                <td><label>Nom</label></td>
+                <td ><input name="nom"></td>
+            </tr>
+            <tr>
+                <td><label>Prenom</label></td>
+                <td ><input name="prenom"></td>
+            </tr>
+            <tr>
+                <td><label>Date de naissance</label></td>
+                <td ><input name="date" type="date"></td>
+            </tr>
+            <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
+            </tr>
+        </table>
+    </form>
+</div></body></html>';
+if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
+
+    $nom=$_POST['nom'];
+    $prenom=$_POST['prenom'];
+    $date=$_POST['date'];
+
+    if($nom!=""&&$prenom!=""){
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur de connexion : ' . $e->getMessage());
+        }
+//preparation de la requête avec les variables $_POST du formulaire
+        $req = $bdd->prepare('INSERT INTO artiste (nom,prenom,dateNaiss) VALUES (?,?,?);');
+        $req->execute([$nom,$prenom,$date]) or die(print_r($req->errorInfo()));
+        header('Location: Admin.php');
+    }
+}}
+?>
+<?php
+
+
+session_start();
+
+$email = $_POST['login'];
+$password = $_POST['mdp'];
+$prenom = $_POST['prenom'];
+$nom = $_POST['nom'];
+
+echo 'email = '. $email .'password = '. $password.'prenom = '. $prenom.'nom = '. $nom;
+
+//connexion bdd
+try{$bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');}
+catch(Exception $e){die('Erreur de connexion : '.$e->getMessage());}
+
+//preparation de la requête avec les variables $_POST du formulaire
+$req = $bdd -> prepare('SELECT email FROM internaute WHERE email=:email');
+$req->execute(array('email' => $email)) or die(print_r($req->errorInfo()));
+
+$donnee = $req->fetch();
+$req->closeCursor();
+
+if($donnee['email'] == $email)
+{
+    $_SESSION['nom']='';
+    header('Location: Index.php');
+}
+else
+{
+    //connexion bdd
+    try{$bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');}
+    catch(Exception $e){die('Erreur de connexion : '.$e->getMessage());}
+
+    //preparation de la requête avec les variables $_POST du formulaire
+    $req = $bdd -> prepare('INSERT INTO internaute (prenom,nom,email,password,admin) VALUES (?, ?, ?, ?, 0)');
+    $req->execute([$prenom,$nom,$email,$password]) or die(print_r($req->errorInfo()));
+
+    $_SESSION['admin']=false;
+    $_SESSION['nom']= $nom;
+    header('Location: Internaute.php');
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nom du site</title>
+    <script src="js/javascript.js"></script>
+</head>
+
+<body>
+<div id="logo">
+    <img src="">
+    <h1>Nom du site</h1>
+</div>
+<button id="sign_button" onclick="sign()">S'inscrire</button>
+<div id="connexion" style="display: block">
+
+    <form action="Traitement.php" method="post">
+        <table>
+            <tr>
+                <td><label for="login">Mail</label></td> <td><input type="text" name="login" id="login" /><br/></td>
+            </tr>
+            <tr>
+                <td><label for="mdp">Mot de passe</label></td> <td><input type="password" name="mdp"  id="mdp"/><br/></td>
+            </tr>
+            <tr>
+                <td></td> <td><input type="button" value="Se Connecter" onclick="VerifierLogin(this.form)"/></br></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+<div id="inscription" style="display: none">
+    <form action="Creation.php" method="post">
+        <table>
+            <tr>
+                <td><label for="login">Mail</label></td> <td><input type="text" name="login" id="login" /></td>
+            </tr>
+            <tr>
+                <td><label for="mdp">Mot de passe</label></td> <td><input type="password" name="mdp"  id="mdp"/></td>
+            </tr>
+            <tr>
+                <td><label>Confirmation</label></td><td><input type="password" name="conf"  id="conf"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="mdp">Prénom</label></td> <td><input type="text" name="prenom"  id="prenom"/><br/></td>
+            </tr>
+            <tr>
+                <td><label for="mdp">Nom</label></td> <td><input type="text" name="nom"  id="nom"/></td>
+            </tr>
+            <tr>
+                <td></td> <td><input type="button" value="S'inscrire" onclick="VerifierInscription(this.form)"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
+
+<?php
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Internaute </title>
+</head>
+<body>
+<div id="logo">
+    <img src="">
+    <h1>Nom du site</h1>
+</div>
+<div>
+    <table>
+        <tr>
+            <th ><button onclick="Menu_film()">Film</button></th>
+            <th ><button onclick="Menu_artiste()">Artiste</button></th>
+            <th ><button onclick="Menu_film()">Genre</button></th>
+            <th ><button onclick="Menu_film()">Internautes</button></th>
+            <th ><button onclick="Menu_film()">Profil</button></th>
+        </tr>
+    </table>
+</div>
+<?php
+session_start();
+//Requete pour afficher les films
+echo'<table id="table_film" style="display: none">
+    <tr>
+        <th>TITRE</th>
+        <th>GENRE</th>
+        <th>NOM DU RÉALISATEUR</th>
+        <th>PRÉNOM DU RÉALISATEUR</th>
+        <th>DATE DE SORTIE</th>
+    </tr>';
+
+try{
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+    die('Erreur de connexion : '.$e->getMessage());}
+$rep = $bdd->query('SELECT * FROM cinema.film INNER JOIN cinema.genre ON film.Genre_idGenre = genre.idGenre INNER JOIN cinema.artiste ON film.Artiste_idRealisateur=artiste.idArtiste;');
+while($donnee = $rep->fetch())
+{
+    echo '<tr>';
+    echo '<td>'.$donnee['titre'].'</td>';
+    echo '<td>'.$donnee['libelle'].'</td>';
+    echo '<td>'.$donnee['nom'].'</td>';
+    echo '<td>'.$donnee['prenom'].'</td>';
+    echo '<td>'.$donnee['annee'].'</td>';
+    echo '</tr>';
+}
+echo'</table>';
+
+//Requete pour afficher les artistes
+echo'<table id="table_artiste" style="display: none">
+    <tr>
+        <th>NOM DU RÉALISATEUR</th>
+        <th>PRÉNOM DU RÉALISATEUR</th>
+        <th>DATE DE NAISSANCE</th>
+    </tr>';
+
+try{
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+    die('Erreur de connexion : '.$e->getMessage());}
+$rep = $bdd->query('SELECT * FROM cinema.artiste;');
+while($donnee = $rep->fetch())
+{
+    echo '<tr>';
+    echo '<td>'.$donnee['nom'].'</td>';
+    echo '<td>'.$donnee['prenom'].'</td>';
+    echo '<td>'.$donnee['dateNaiss'].'</td>';
+    echo '</tr>';
+}
+echo'</table>';
+?>
+
+    <script>
+        function Menu_film() {
+            document.getElementById("table_film").setAttribute("style","display:block");
+            document.getElementById("table_artiste").setAttribute("style","display:none");
+        }
+        function Menu_artiste() {
+            document.getElementById("table_film").setAttribute("style","display:none");
+            document.getElementById("table_artiste").setAttribute("style","display:block");
+        }
+    </script>
+
+</body>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nom du site</title>
+</head>
+
+<body>
+<a href="Admin.php">Retour</a>
+<?php
+$id=$_GET['id'];
+if(isset($_GET['nom'])&&isset($_GET['date'])&&isset($_GET['prenom'])){
+$nom=$_GET['nom'];
+$date=$_GET['date'];
+$prenom=$_GET['prenom'];
+}
+$resume=urldecode($_GET['resume']);
+if(isset($_GET['film'])&&isset($_GET['date'])&&isset($_GET['type'])&&isset($_GET['artiste'])){
+    $titre=$_GET['film'];
+    $date=$_GET['date'];
+    $genre=$_GET['type'];
+    $artiste=$_GET['artiste'];
+}
+if(isset($_GET['libelle']))
+    $libelle=$_GET['libelle'];
+
+if($_GET['genre']==="film"){echo '<div>
+    <form action="Modification.php?id='.$id.'&film='.$titre.'&genre=film&date='.$date.'&resume='.$resume.'" method="post">
+        <table>
+            <tr>
+                <td><label>Titre</label></td> <td><input type="text" name="titre" value="'.$titre.'"/></td>
+            </tr>
+            <tr>
+                <td><label>Annee</label></td> <td><input type="text" name="annee" value="'.$date.'"/></td>
+            </tr>
+            <tr>
+                <td><label>Genre</label></td>
+                <td ><select name="genre">';
+
+    try{
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+    }
+    catch(Exception $e){
+        die('Erreur de connexion : '.$e->getMessage());}
+    $rep = $bdd->query('SELECT * FROM cinema.genre;');
+    while($donnee = $rep->fetch())
+    {
+        echo('<option name="genre" value="'.$donnee['idGenre'].'">'.$donnee['libelle'].'</option>');
+    }
+    echo'</select>Ancien: '.$genre.'</td>
+            </tr>
+            <tr>
+                <td><label>Artiste</label></td>
+                <td ><select name="artiste">';
+
+    try{
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+    }
+    catch(Exception $e){
+        die('Erreur de connexion : '.$e->getMessage());}
+    $rep = $bdd->query('SELECT * FROM cinema.artiste;');
+    while($donnee = $rep->fetch())
+    {
+        echo('<option name="artiste" value="'.$donnee['idArtiste'].'">'.$donnee['prenom'].' '.$donnee['nom'].'</option>');
+    }
+    echo'</select>Ancien: '.$artiste.'</td>
+            </tr>
+            <textarea name="resume" rows="4" cols="50">'.utf8_encode($resume).'</textarea>
+                <tr><td><input type="button" value="Modifier" onclick="this.form.submit()"></td></tr>
+            </tr>
+        </table>
+    </form>
+</div></body></html>';
+    if(isset($_POST['titre'])&&isset($_POST['annee'])){
+        $titre=$_POST['titre'];
+        $annee=$_POST['annee'];
+        $Artiste=$_POST['artiste'];
+        $Genre=$_POST['genre'];
+        $resume=$_POST['resume'];
+        if($titre!=""||$annee!=""){
+            try {
+                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+            } catch (Exception $e) {
+                die('Erreur de connexion : ' . $e->getMessage());
+            }
+//preparation de la requête avec les variables $_POST du formulaire
+            $req = $bdd->prepare('UPDATE film SET titre = ?, annee = ?, Artiste_idRealisateur = ?, Genre_idGenre = ?,resume=? WHERE (idFilm = ?);');
+            $req->execute([$titre,$annee,$Artiste,$Genre,$resume,$id]) or die(print_r($req->errorInfo()));
+            header('Location: Admin.php');
+        }
+    }
+}
+
+if($_GET['genre']==="genre"){echo'
+<div>
+    <form action="Modification.php?id='.$id.'&genre=genre" method="post">
+        <table>
+            <tr>
+                <td><label>Libelle</label></td>
+                <td ><input name="libelle" value="'.$libelle.'"></td>
+            </tr>
+                <td><input type="button" value="Modifier" onclick="this.form.submit()"></td>
+            </tr>
+        </table>
+    </form>
+</div></body></html>';
+    if(isset($_POST['libelle'])){
+        $libelle=$_POST['libelle'];
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur de connexion : ' . $e->getMessage());
+        }
+//preparation de la requête avec les variables $_POST du formulaire
+        $req = $bdd->prepare('UPDATE genre SET libelle = ? WHERE (idGenre = ?);');
+        $req->execute([$libelle,$id]) or die(print_r($req->errorInfo()));
+        header('Location: Admin.php');}
+}
+
+if($_GET['genre']==="artiste"){echo'<div>
+    <form action="Modification.php?id='.$id.'&genre=artiste" method="post">
+        <table>
+            <tr>
+                <td><label>Nom</label></td>
+                <td ><input name="nom" value="'.$nom.'"></td>
+            </tr>
+            <tr>
+                <td><label>Prenom</label></td>
+                <td ><input name="prenom" value="'.$prenom.'"></td>
+            </tr>
+            <tr>
+                <td><label>Date de naissance</label></td>
+                <td ><input name="date" type="date" value="'.$date.'"></td>
+            </tr>
+            <td><input type="button" value="Modifier" onclick="this.form.submit()"></td>
+            </tr>
+        </table>
+    </form>
+</div></body></html>';
+    if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
+
+        $nom=$_POST['nom'];
+        $prenom=$_POST['prenom'];
+        $date=$_POST['date'];
+
+        if($nom!=""&&$prenom!=""){
+            try {
+                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+            } catch (Exception $e) {
+                die('Erreur de connexion : ' . $e->getMessage());
+            }
+//preparation de la requête avec les variables $_POST du formulaire
+            $req = $bdd->prepare('UPDATE artiste SET nom = ?, prenom = ?, dateNaiss = ? WHERE (`idArtiste` = ?);');
+            $req->execute([$nom,$prenom,$date,$id]) or die(print_r($req->errorInfo()));
+            header('Location: Admin.php');
+        }
+    }
+}
+?>
+
+@CHARSET "UTF-8";
+div[id="div_operations_admin"] {
+    width				: 100px;
+    height				: 450px;
+    margin-left			: 0px;
+    background-color	: black;
+    text-align			: center;
+    border-radius		: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 40px;
+    padding: 5px;
+    color: Black;
+}
+
+input[type="submit"] {
+
+    margin-left: 0px;
+    margin-top: 5px;
+    color: white;
+    border: none;
+    font-size: smaller;
+    border-radius: 5px 5px 5px 5px;
+}
+
+form{
+    width        :100px;
+    margin-left  :600px;
+}
+
+
+div{
+    display				: inline-block;
+    width				: 200px;
+    height				: 150px;
+    vertical-align		: top;
+    color				: black;
+    background-color	: black;
+    text-align			: center;
+    padding-top			: 10px;
+    border-radius		: 5px 5px 5px 5px;
+}
+
+table {
+    border-collapse		: collapse;
+    margin				: auto;
+    border-radius		: 5px;
+    overflow			: hidden;
+}
+
+#tr_id{
+    width				: 50px;
+}
+#tr_nom{
+    width				: 200px;
+}
+#tr_cons{
+    width				: 100px;
+}
+#tr_prix{
+    width				: 50px;
+}
+#tr_nbj{
+    width				: 120px;
+}
+#tr_com{
+    width				: 300px;
+}
+#tr_prop{
+    width				: 50px;
+}
+
+td,th{
+    border				: 1px solid black;
+    padding				: 5px;
+}
+
+#div_operations_admin{
+    width				: 1400px;
+    height				: 400px;
+    background			: rgba(255,255,255,1);
+
+
+}
+#div_operations_admin label{
+    width				: 150px;
+    color				: black;
+    font-size			: 1.2em;
+}
+
+#listes_operation_admin{
+    width				: 200px;
+
+}
+
+#operationAdminSelected{
+    visibility			: hidden;
+}
+
+
+
+#formulaireAjout label{
+    width               :200px;
+    text-align          :center;
+}
+
+
+#formulaireAjout input{
+    width               :200px;
+    height              :20px;
+    margin-right        :90px;
+}
+
+#formulaireAjout input[name="nom"]{
+    width               :150px;
+    margin-left         :25px;
+}
+#formulaireAjout input[name="console"]{
+    width               :100px;
+    margin-left         :50px;
+}
+#formulaireAjout input[name="prix"]{
+    width               :50px;
+    margin-left         :75px;
+}
+#formulaireAjout input[name="nb_joueurs"]{
+    width               :50px;
+    margin-left         :75px;
+}
+#formulaireAjout input[name="commentaires"]{
+    width               :200px;
+    height              :90px;
+}
+#formulaireAjout input[name="proprietaire_ID"]{
+    width               :100px;
+    margin-left         :50px;
+}
+
+form button{
+    width               :100px;
+    margin-left         :50px;
+    background-color    :lightgray;
+    color               :black;
+    text-align          :center;
+}
+
+table button{
+    background-color    :lightgray;
+    color               :black;
+    text-align          :center;
+}
+
+<?php
+session_start();
+if(isset($_GET['id']))
+    $id = $_GET['id'];
+else
+    $id=NULL;
+
+if(isset($_GET['genre']))
+    $genre = $_GET['genre'];
+else
+    $genre=NULL;
+
+if($genre=="film"){
+//connexion bdd
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+    } catch (Exception $e) {
+        die('Erreur de connexion : ' . $e->getMessage());
+    }
+    //preparation de la requête avec les variables $_POST du formulaire
+    $req = $bdd->prepare('DELETE FROM film WHERE (idFilm = ?);');
+    $req->execute([$id]) or die(print_r($req->errorInfo()));
+}
+
+if($genre=="genre"){
+//connexion bdd
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+    } catch (Exception $e) {
+        die('Erreur de connexion : ' . $e->getMessage());
+    }
+    //preparation de la requête avec les variables $_POST du formulaire
+    $requete = $bdd->prepare('DELETE FROM film WHERE (Genre_idGenre = ?);');
+    $requete->execute([$id]) or die(print_r($requete->errorInfo()));
+
+    $req = $bdd->prepare('DELETE FROM genre WHERE (idGenre = ?);');
+    $req->execute([$id]) or die(print_r($req->errorInfo()));
+}
+
+if($genre=="internaute"){
+//connexion bdd
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+    } catch (Exception $e) {
+        die('Erreur de connexion : ' . $e->getMessage());
+    }
+    $req = $bdd->prepare('DELETE FROM internaute WHERE (idInternaute = ?);');
+    $req->execute([$id]) or die(print_r($req->errorInfo()));
+}
+
+if($genre=="artiste"){
+//connexion bdd
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+    } catch (Exception $e) {
+        die('Erreur de connexion : ' . $e->getMessage());
+    }
+    $req = $bdd->prepare('DELETE FROM film WHERE (Artiste_idRealisateur = ?);');
+    $req->execute([$id]) or die(print_r($req->errorInfo()));
+
+    $requete = $bdd->prepare('DELETE FROM artiste WHERE (idArtiste = ?);');
+    $requete->execute([$id]) or die(print_r($requete->errorInfo()));
+
+}
+   header('Location: Admin.php');
+<?php
+/*TODO Vérifier l'existance du mail et bon mdp dans la base de données
+    Vérifier le statut 'ADMIN' de l'utilisateur
+*/
+
+session_start();
+
+$email = $_POST['login'];
+$password = $_POST['mdp'];
+
+//connexion bdd
+try{$bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');}
+catch(Exception $e){die('Erreur de connexion : '.$e->getMessage());}
+
+//preparation de la requête avec les variables $_POST du formulaire
+$req = $bdd -> prepare('SELECT * FROM internaute WHERE password=:password AND email=:email');
+$req->execute(array('password' => $password,'email' => $email)) or die(print_r($req->errorInfo()));
+
+$donnee = $req->fetch();
+$req->closeCursor();
+
+switch($donnee['admin']){
+
+    case '1' 	:	//Redirection vers admin.php avec variable $_SESSION['who']='admin'
+        $_SESSION['admin']=true;
+        $_SESSION['nom']= $donnee['nom'];
+        header('Location: Admin.php');
+        break;
+
+    case '0'		:	//Redirection vers index.php avec variable $_SESSION['who']='moh'
+        $_SESSION['admin']=false;
+        $_SESSION['nom']= $donnee['nom'];
+        header('Location: Internaute.php');
+        break;
+
+    default			:	//Redirection vers index.php avec variable $_SESSION['who']='default'
+        $_SESSION['nom']='';
+        header('Location: Index.php');
+        break;
+}
+?>
