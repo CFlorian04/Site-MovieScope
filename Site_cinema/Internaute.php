@@ -11,26 +11,24 @@
 <div>
     <table>
         <tr>
-            <th ><button onclick="Menu_film()">Film</button></th>
-            <th ><button onclick="Menu_artiste()">Artiste</button></th>
-            <th ><button onclick="Menu_film()">Genre</button></th>
-            <th ><button onclick="Menu_film()">Internautes</button></th>
-            <th ><button onclick="Menu_film()">Profil</button></th>
+            <th id="" onclick="">Film</th>
+            <th id="" onclick="">Artiste</th>
+            <th id="" onclick="">Genre</th>
+            <th id="" onclick="">Internautes</th>
+            <th id="" onclick="">Profil</th>
         </tr>
     </table>
 </div>
-<?php
-session_start();
-//Requete pour afficher les films
-echo'<table id="table_film" style="display: none">
+<table>
     <tr>
         <th>TITRE</th>
         <th>GENRE</th>
-        <th>NOM DU RÉALISATEUR</th>
-        <th>PRÉNOM DU RÉALISATEUR</th>
+        <th>RÉALISATEUR</th>
         <th>DATE DE SORTIE</th>
-    </tr>';
+    </tr>
+<?php
 
+session_start();
 try{
     $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
 }
@@ -42,47 +40,10 @@ while($donnee = $rep->fetch())
     echo '<tr>';
     echo '<td>'.$donnee['titre'].'</td>';
     echo '<td>'.$donnee['libelle'].'</td>';
-    echo '<td>'.$donnee['nom'].'</td>';
-    echo '<td>'.$donnee['prenom'].'</td>';
+    echo '<td>'.$donnee['nom']." ".$donnee['prenom'].'</td>';
     echo '<td>'.$donnee['annee'].'</td>';
     echo '</tr>';
 }
-echo'</table>';
-
-//Requete pour afficher les artistes
-echo'<table id="table_artiste" style="display: none">
-    <tr>
-        <th>NOM DU RÉALISATEUR</th>
-        <th>PRÉNOM DU RÉALISATEUR</th>
-        <th>DATE DE NAISSANCE</th>
-    </tr>';
-
-try{
-    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
-}
-catch(Exception $e){
-    die('Erreur de connexion : '.$e->getMessage());}
-$rep = $bdd->query('SELECT * FROM cinema.artiste;');
-while($donnee = $rep->fetch())
-{
-    echo '<tr>';
-    echo '<td>'.$donnee['nom'].'</td>';
-    echo '<td>'.$donnee['prenom'].'</td>';
-    echo '<td>'.$donnee['dateNaiss'].'</td>';
-    echo '</tr>';
-}
-echo'</table>';
 ?>
-
-    <script>
-        function Menu_film() {
-            document.getElementById("table_film").setAttribute("style","display:block");
-            document.getElementById("table_artiste").setAttribute("style","display:none");
-        }
-        function Menu_artiste() {
-            document.getElementById("table_film").setAttribute("style","display:none");
-            document.getElementById("table_artiste").setAttribute("style","display:block");
-        }
-    </script>
-
+</table>
 </body>
