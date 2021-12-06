@@ -1,12 +1,12 @@
 <html lang="fr">
 <head>
-    <meta charset="UTF-8-UNICODE">
+    <meta charset="UTF-8">
     <title>Admin</title>
 </head>
 <body>
 <div id="logo">
     <img src="">
-    <h1>Nom du site</h1>
+    <h1>Nom du site/TheMovieScope</h1>
 </div>
 <div>
     <table>
@@ -120,8 +120,8 @@ while($donnee = $rep->fetch())
     echo '<td>'.$donnee['nom'].'</td>';
     echo '<td>'.$donnee['prenom'].'</td>';
     echo '<td>'.$donnee['admin'].'</td>';
-    echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internaute"><button>Supprimer</button></a></td>';
-    echo '<td><a href="Modification.php?id='.$donnee['idInternaute'].'&genre=internaute"><button>Modifier</button></a></td>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internautes"><button>Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idInternaute'].'&nom='.$donnee['nom'].'&prenom='.$donnee['prenom'].'&admin='.$donnee['admin'].'&genre=internautes"><button>Modifier</button></a></td>';
     echo '</tr>';
 }
 echo'</table>';

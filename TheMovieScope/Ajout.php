@@ -61,7 +61,7 @@ if($_GET['action']==="film"){echo '<div>
         $annee=$_POST['annee'];
         $Artiste=$_POST['artiste'];;
         $Genre=$_POST['genre'];
-        if($titre!=""||$annee!=""){
+
             try {
                 $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
             } catch (Exception $e) {
@@ -72,7 +72,6 @@ if($_GET['action']==="film"){echo '<div>
             $req->execute([$titre,$annee,$Artiste,$Genre]) or die(print_r($req->errorInfo()));
             header('Location: Admin.php');
         }
-    }
 }
 
 if($_GET['action']==="genre"){echo'
@@ -126,8 +125,6 @@ if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
     $nom=$_POST['nom'];
     $prenom=$_POST['prenom'];
     $date=$_POST['date'];
-
-    if($nom!=""&&$prenom!=""){
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
         } catch (Exception $e) {
@@ -138,5 +135,5 @@ if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
         $req->execute([$nom,$prenom,$date]) or die(print_r($req->errorInfo()));
         header('Location: Admin.php');
     }
-}}
+}
 ?>

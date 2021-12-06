@@ -1,16 +1,8 @@
 <?php
 session_start();
-if(isset($_GET['id']))
-    $id = $_GET['id'];
-else
-    $id=NULL;
+ $id = $_GET['id'];
 
-if(isset($_GET['genre']))
-    $genre = $_GET['genre'];
-else
-    $genre=NULL;
-
-if($genre=="film"){
+if($_GET['genre']=="film"){
 //connexion bdd
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
@@ -21,8 +13,8 @@ if($genre=="film"){
     $req = $bdd->prepare('DELETE FROM film WHERE (idFilm = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
 }
-
-if($genre=="genre"){
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if($_GET['genre']=="genre"){
 //connexion bdd
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
@@ -36,8 +28,8 @@ if($genre=="genre"){
     $req = $bdd->prepare('DELETE FROM genre WHERE (idGenre = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
 }
-
-if($genre=="internaute"){
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if($_GET['genre']=="internautes"){
 //connexion bdd
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
@@ -47,8 +39,8 @@ if($genre=="internaute"){
     $req = $bdd->prepare('DELETE FROM internaute WHERE (idInternaute = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
 }
-
-if($genre=="artiste"){
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if($_GET['genre']=="artiste"){
 //connexion bdd
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
