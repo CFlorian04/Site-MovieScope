@@ -1,8 +1,4 @@
 <?php
-/*TODO Vérifier l'existance du mail et bon mdp dans la base de données
-    Vérifier le statut 'ADMIN' de l'utilisateur
-*/
-
 session_start();
 
 $email = $_POST['login'];
@@ -22,13 +18,13 @@ $req->closeCursor();
 switch($donnee['admin']){
 
     case '1' 	:	//Redirection vers admin.php avec variable $_SESSION['who']='admin'
-        $_SESSION['admin']=true;
+        $_SESSION['admin']=1;
         $_SESSION['nom']= $donnee['nom'];
         header('Location: Admin.php');
         break;
 
     case '0'		:	//Redirection vers index.php avec variable $_SESSION['who']='moh'
-        $_SESSION['admin']=false;
+        $_SESSION['admin']=0;
         $_SESSION['nom']= $donnee['nom'];
         header('Location: Internaute.php');
         break;

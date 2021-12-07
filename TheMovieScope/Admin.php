@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['admin'])){
+if ($_SESSION['admin'] == 0 ) {
+    header('location:Internaute.php');
+}}
+else
+    header('location:Index.php');
+?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,12 +15,12 @@
 <body>
 <div id="logo">
     <img src="">
-    <h1>Nom du site/TheMovieScope</h1>
+    <h1>TheMovieScope</h1>
 </div>
+<a href="Index.php">Déconnexion</a>
 <div>
     <table>
         <tr>
-
             <th ><button onclick="Menu_film()">Film <select id="film""><option>Lire</option><option>Ajout</option></select></button></th>
             <th ><button onclick="Menu_artiste()">Artiste<select id="artiste"><option>Lire</option><option>Ajout</option></select></button></th>
             <th ><button onclick="Menu_genre()">Genre<select id="genre"><option>Lire</option><option>Ajout</option></select></button></th>
@@ -21,7 +30,7 @@
     </table>
 </div>
 <?php
-session_start();
+if ($_SESSION['admin']==0){header('Internaute.php');}
 //Requete pour afficher les films
 echo'<table id="table_film" style="display: none">
     <tr>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['admin'])){
+    if ($_SESSION['admin'] == 1 ) {
+            header('location:Admin.php');
+    }}
+else
+    header('location:Index.php');
+?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +29,6 @@
     </table>
 </div>
 <?php
-session_start();
 //Requete pour afficher les films
 echo'<table id="table_film" style="display: none">
     <tr>
