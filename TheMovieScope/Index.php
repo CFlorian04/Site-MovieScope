@@ -18,7 +18,7 @@
 <nav class="navbar navbar-dark navbar-expand-md fixed-top d-lg-flex">
     <div class="container-fluid"><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link active"><button id="sign_button" onclick="sign()">S'inscrire</button></a></li>
+            <li class="nav-item"><a class="nav-link active"><strong><button id="sign_button" style="background-color: transparent; color:white; border-color: transparent;" onclick="sign()">S'inscrire</button></strong></a></li>
         </ul>
     </div>
 </nav>
