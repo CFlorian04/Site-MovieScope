@@ -20,19 +20,14 @@ try{
 catch(Exception $e){
     die('Erreur de connexion : '.$e->getMessage());}
 $rep = $bdd->query('SELECT * FROM cinema.artiste WHERE idArtiste='.$id.';');
-while($donnee = $rep->fetch()) {
-    $age = date("Y-m-d") - $donnee['dateNaiss'] ;
-    echo    '<th><img height="200px" width="150px" src="'.$donnee['image'].'">'.
-            '<h2>'.$donnee['prenom'] . ' ' . $donnee['nom'] . '</h2>'.
-            ' Date de naissance :' . $donnee['dateNaiss'] ." (". $age." ans)".''.
-            '</th>';
-
-    if ($_SESSION['admin'] == 1) {
-        echo '  <td><a href="Suppression.php?id=' . $donnee['idArtiste'] . '&genre=artiste"><button>Supprimer</button></a></td>
-                <td><a href="Modification.php?id=' . $donnee['idArtiste'] . '&genre=artiste&nom=' . $donnee['nom'] . '&prenom=' . $donnee['prenom'] . '&date=' . $donnee['dateNaiss'] . '"><button>Modifier</button></a></td>';
-    }
+while($donnee = $rep->fetch())
+{
+    echo '<th>NOM</th><tr align="center"><td >'.$donnee['nom'].'</td></tr>';
+    echo '<th>PRENOM</th><tr align="center"><td >'.$donnee['prenom'].'</td></tr>';
+    echo '<th>DATE DE NAISSANCE</th><tr align="center"><td >'.$donnee['dateNaiss'].'</td></tr>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idArtiste'].'&genre=artiste"><button>Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idArtiste'].'&genre=artiste&nom='.$donnee['nom'].'&prenom='.$donnee['prenom'].'&date='.$donnee['dateNaiss'].'"><button>Modifier</button></a></td>';
 }
-?>
-</table>
+echo'</table>';?>
 </body>
 </html>

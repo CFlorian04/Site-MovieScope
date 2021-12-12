@@ -12,6 +12,9 @@ if($_GET['genre']=="film"){
     //preparation de la requête avec les variables $_POST du formulaire
     $req = $bdd->prepare('DELETE FROM film WHERE (idFilm = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
+    $req = $bdd->prepare('DELETE FROM noter WHERE (Film_idFilm = ?);');
+    $req->execute([$id]) or die(print_r($req->errorInfo()));
+    header('Location: Admin.php?menu=film');
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if($_GET['genre']=="genre"){
@@ -27,6 +30,7 @@ if($_GET['genre']=="genre"){
 
     $req = $bdd->prepare('DELETE FROM genre WHERE (idGenre = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
+    header('Location: Admin.php?menu=genre');
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if($_GET['genre']=="internautes"){
@@ -38,6 +42,8 @@ if($_GET['genre']=="internautes"){
     }
     $req = $bdd->prepare('DELETE FROM internaute WHERE (idInternaute = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
+    header('Location: Admin.php?menu=internautes');
+
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if($_GET['genre']=="artiste"){
@@ -52,6 +58,6 @@ if($_GET['genre']=="artiste"){
 
     $requete = $bdd->prepare('DELETE FROM artiste WHERE (idArtiste = ?);');
     $requete->execute([$id]) or die(print_r($requete->errorInfo()));
+    header('Location: Admin.php?menu=artiste');
 
 }
-   header('Location: Admin.php');

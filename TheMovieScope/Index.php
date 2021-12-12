@@ -3,62 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Nom du site</title>
-    <script src="js/javascript.js"></script>
+    <script src="js/formulaire.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-<div id="logo">
-    <img src="">
-    <h1>Nom du site</h1>
-</div>
-<button id="sign_button" onclick="sign()">S'inscrire</button>
-<div id="connexion" style="display: block">
+<a class="navbar-brand"><img src="assets/img/logo_TheMovieScope_HD.png" width="250px" /></a>
+<nav class="navbar navbar-dark navbar-expand-md fixed-top d-lg-flex">
+    <div class="container-fluid"><button class="navbar-toggler" data-bs-toggle="collapse"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active"><button style="color:white; background-color:transparent;border-color:transparent"  id="sign_button" onclick="sign()">S'inscrire</button></a></li>
+        </ul>
+    </div>
+</nav>
 
-    <form action="Traitement.php" method="post">
-        <table>
-            <tr>
-                <td><label for="login">Mail</label></td> <td><input type="text" name="login" id="login" /><br/></td>
-            </tr>
-            <tr>
-                <td><label for="mdp">Mot de passe</label></td> <td><input type="password" name="mdp"  id="mdp"/><br/></td>
-            </tr>
-            <tr>
-                <td></td> <td><input type="button" value="Se Connecter" onclick="VerifierLogin(this.form)"/></br></td>
-            </tr>
-        </table>
-    </form>
-</div>
-
+<section class="login-dark">
+    <div id="connexion" style="display: block;">
+        <form action="Traitement.php" method="post">
+            <h2 class="visually-hidden">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            <div class="mb-3"><input class="form-control" type="text" name="login" id="login" placeholder="Mail"></div>
+            <div class="mb-3"><input class="form-control d-lg-flex" type="password" id="mdp" name="mdp" placeholder="Password"></div>
+            <div class="mb-3"><button class="btn btn-primary d-block w-100" type="button" onclick="VerifierLogin(this.form)">Connexion</button></div>
+        </form>
+    </div>
 
 <div id="inscription" style="display: none">
     <form action="Creation.php" method="post">
-        <table>
-            <tr>
-                <td><label for="login">Mail</label></td> <td><input type="text" name="login" id="login" /></td>
-            </tr>
-            <tr>
-                <td><label for="mdp">Mot de passe</label></td> <td><input type="password" name="mdp"  id="mdp"/></td>
-            </tr>
-            <tr>
-                <td><label>Confirmation</label></td><td><input type="password" name="conf"  id="conf"/></td>
-            </tr>
-
-            <tr>
-                <td><label for="mdp">Prénom</label></td> <td><input type="text" name="prenom"  id="prenom"/><br/></td>
-            </tr>
-            <tr>
-                <td><label for="mdp">Nom</label></td> <td><input type="text" name="nom"  id="nom"/></td>
-            </tr>
-            <tr>
-                <td></td> <td><input type="button" value="S'inscrire" onclick="VerifierInscription(this.form)"/></td>
-            </tr>
-        </table>
+        <h2 class="visually-hidden">Login Form</h2>
+        <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+        <div class="mb-3"><input class="form-control" type="text" name="login" id="login" placeholder="Mail"></div>
+        <div class="mb-3"><input class="form-control" type="text" name="nom" id="nom" placeholder="Nom"></div>
+        <div class="mb-3"><input class="form-control" type="text" name="prenom" id="prenom" placeholder="Prenom"></div>
+        <div class="mb-3"><input class="form-control d-lg-flex" type="password" name="mdp" id="mdp" name="password" placeholder="Mot de passe"></div>
+        <div class="mb-3"><input class="form-control d-lg-flex" type="password" name="conf" id="conf" name="conf" placeholder="Confirmation"></div>
+        <div class="mb-3"><button class="btn btn-primary d-block w-100" type="button" onclick="VerifierInscription(this.form)">S'inscrire</button></div>
     </form>
 </div>
+</section>
 </body>
 </html>
-
 <?php
 session_start();
 session_destroy();

@@ -19,18 +19,12 @@ switch($donnee['admin']){
 
     case '1' 	:	//Redirection vers admin.php
         $_SESSION['admin']=1;
-/*        $_SESSION['id']= $donnee['id'];
-        $_SESSION['nom']= $donnee['nom'];
-        $_SESSION['prenom']= $donnee['prenom'];*/
         $_SESSION['donnee'] = $donnee;
         header('Location: Admin.php');
         break;
 
     case '0'		:	//Redirection vers index.php
         $_SESSION['admin']=0;
-        /*        $_SESSION['id']= $donnee['id'];
-        $_SESSION['nom']= $donnee['nom'];
-        $_SESSION['prenom']= $donnee['prenom'];*/
         $_SESSION['donnee'] = $donnee;
         header('Location: Internaute.php');
         break;

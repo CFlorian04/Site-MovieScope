@@ -22,11 +22,11 @@ catch(Exception $e){
 $rep = $bdd->query('SELECT * FROM cinema.film INNER JOIN cinema.genre ON film.Genre_idGenre = genre.idGenre INNER JOIN cinema.artiste ON film.Artiste_idRealisateur=artiste.idArtiste WHERE idFilm='.$id.' ;');
 while($donnee = $rep->fetch())
 {
-    echo '<th>TITRE</th><tr><td >'.$donnee['titre'].'</td></tr>';
-    echo '<th>GENRE</th><tr ><td>'.$donnee['libelle'].'</td></tr>';
-    echo '<th>REALISATEUR</th><tr><td>'.$donnee[11]." ".$donnee[10].'</td></tr>';
-    echo '<th>DATE DE SORTIE</th><tr><td>'.$donnee['annee'].'</td></tr>';
-    echo '<th>RESUME</th><tr><td>'.utf8_encode($donnee['resume']).'</td></tr>';
+    echo '<th>TITRE</th><tr align="center"><td >'.$donnee['titre'].'</td></tr>';
+    echo '<th>GENRE</th><tr align="center"><td>'.$donnee['libelle'].'</td></tr>';
+    echo '<th>REALISATEUR</th><tr align="center"><td>'.$donnee[11]." ".$donnee[10].'</td></tr>';
+    echo '<th>DATE DE SORTIE</th><tr align="center"><td>'.$donnee['annee'].'</td></tr>';
+    echo '<th>RESUME</th><tr align="center"><td>'.utf8_encode($donnee['resume']).'</td></tr>';
     if($_SESSION['admin']==1){
     echo '<tr><td><a href="Suppression.php?id='.$donnee['idFilm'].'&genre=film"><button>Supprimer</button></a></td>';
     echo '<td><a href="Modification.php?id='.$donnee['idFilm'].'&film='.$donnee['titre'].'&genre=film&date='.$donnee['annee'].'&type='.$donnee['libelle'].'&artiste='.$donnee['prenom']." ".$donnee['nom'].'&resume='.urlencode($donnee['resume']).'&image='.$donnee[6].'"><button>Modifier</button></a></td></tr>';
