@@ -11,12 +11,31 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Nom du site</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
-<a href="Admin.php">Retour</a>
+
+
+
+<nav>
+    <div class="navbar">
+        <div class="logo"><a>TheMovieScope</a></div>
+        <div class="nav-links">
+            <ul class="links">
+                <li><a href="Admin.php">Retour</a></li>
+                <li><a href="Profil.php">Profil</a></li>
+                <li><a href="Index.php">Déconnexion</a></li>
+            </ul>
+        </div>
+        <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70" /></a></div>
+    </div>
+
+
+
 <?php
 
-echo'<div>
+echo'<div id="modif_div">
+    <h1>Bonjour '.$_SESSION['donnee']['nom'].'  '.$_SESSION['donnee']['prenom'].' ! </h1>
     <form action="Profil.php" method="post">
         <table>
             <tr>
@@ -37,6 +56,7 @@ echo'<div>
         </table>
     </form>
 </div>
+</nav>
 </body>
 </html>';
 

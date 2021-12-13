@@ -224,5 +224,15 @@ button
     border: none;
 }
 
+table {
+    margin-left: 20px;
+}
 
+table td {
+    padding: 10px;
+}
+
+table td h5 {
+    text-align: center;
+}
 

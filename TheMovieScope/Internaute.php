@@ -44,13 +44,13 @@ echo'<div id="menu" style="display: none">'.$menu.'</div>'
                 ?>
             </ul>
         </li>
-        <li></li>
         <li><a href="Profil.php">Profil</a></li>
         <li><a href="Index.php">Déconnexion</a></li>
     </ul>
 </div>
 <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70" /></a></div>
 </div>
+
 <?php
 try{
 $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
@@ -72,7 +72,7 @@ $rep = $bdd->query('SELECT * FROM cinema.artiste;');
 echo'<table id="table_artiste" style="display: none">';
 while($donnee = $rep->fetch())
 {
-echo '<td><a href="Artistes.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a></td>';
+echo '<td><a href="Artiste.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a></td>';
 }
 echo'</table>';
 
@@ -92,9 +92,9 @@ echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['tit
 }
 echo'</table>';}
 ?>
-</nav>
-</body>
 
+</body>
+</nav>
 <script>
 if(document.getElementById("menu").outerText==="film"){
 Menu_film();

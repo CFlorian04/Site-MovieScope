@@ -5,11 +5,31 @@
 
     <meta charset="UTF-8">
     <title>Nom du site</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
 <body>
+
+
+
+<nav>
+    <div class="navbar">
+        <div class="logo"><a>TheMovieScope</a></div>
+        <div class="nav-links">
+            <ul class="links">
+                <li><a href="Admin.php">Retour</a></li>
+                <li><a href="Profil.php">Profil</a></li>
+                <li><a href="Index.php">Déconnexion</a></li>
+            </ul>
+        </div>
+        <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70" /></a></div>
+    </div>
+
+
+
+<div id="modif_div">
+
 <?php
-echo'<a href="Admin.php?menu='.$_GET['action'].'">Retour</a>';
 if($_GET['action']==="film"){echo '<div>
     <form action="Ajout.php?action=film" method="post">
         <table>
@@ -51,12 +71,13 @@ if($_GET['action']==="film"){echo '<div>
         echo('<option name="artiste" value="'.$donnee['idArtiste'].'">'.$donnee['prenom'].' '.$donnee['nom'].'</option>');
     }
     echo'</select></td>
-        </table>
-                    </tr>Résumé</br>
-                    <textarea name="resume" rows="4" cols="50"></textarea></br>
-                    <td><input type="url" placeholder="image" name="image"></td>
+        
+                    </tr>
+                    <td><label>Résumé</label></td><td><input name="resume" rows="3" cols="50"></textarea></td>
+                    <td><label>Image</label></td><td><input type="url" placeholder="URL" name="image"></td>
                 <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
             </tr>
+        </table>
     </form>
 </div></body></html>';
     if(isset($_POST['titre'])&&isset($_POST['annee'])){
@@ -90,7 +111,7 @@ if($_GET['action']==="genre"){echo'
             </tr>
         </table>
     </form>
-</div></body></html>';
+</div>';
 if(isset($_POST['libelle'])){
         $libelle=$_POST['libelle'];
             try {
@@ -124,7 +145,7 @@ if($_GET['action']==="artiste"){echo'<div>
             </tr>
         </table>
     </form>
-</div></body></html>';
+</div>';
 if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
 
     $nom=$_POST['nom'];
@@ -142,3 +163,8 @@ if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
     }
 }
 ?>
+
+</div>
+</nav>
+</body>
+</html>

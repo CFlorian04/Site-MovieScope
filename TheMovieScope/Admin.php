@@ -56,6 +56,7 @@ echo'<div id="menu" style="display: none">'.$menu.'</div>'
             </div>
             <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70" /></a></div>
         </div>
+
 <?php
 try{
     $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
@@ -69,7 +70,7 @@ echo'<table id="table_film" style="display: none">';
 $rep = $bdd->query('SELECT * FROM cinema.film ;');
 while($donnee = $rep->fetch())
 {
-    echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['titre'].'" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="'.$donnee['image'].'"></a></td>';
+    echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['titre'].'" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="'.$donnee['image'].'"></a><h5>'.$donnee['titre'].'</h5></td>';
 }
 echo'</table>';
 //////////////////////////////////////////////////////////Requete pour afficher les artistes/////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +78,7 @@ $rep = $bdd->query('SELECT * FROM cinema.artiste;');
 echo'<table id="table_artiste" style="display: none">';
 while($donnee = $rep->fetch())
 {
-    echo '<td><a href="Artistes.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a></td>';
+    echo '<td><a href="Artiste.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a> <h5>'.$donnee['prenom']." ".$donnee['nom'].'</h5></td>';
 }
 echo'</table>';
 
@@ -113,8 +114,9 @@ while($donnee = $rep->fetch())
 }
 echo'</table>';
 ?>
-    </nav>
+
 </body>
+</nav>
 <script>
     if(document.getElementById("menu").outerText==="film"){
         Menu_film();
