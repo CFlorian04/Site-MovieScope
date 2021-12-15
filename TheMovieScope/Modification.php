@@ -11,7 +11,7 @@
 <a href="Admin.php">Retour</a>
 <?php
 $id=$_GET['id'];
-if($_GET['genre']==="film"){
+if($_GET['genre']=="film"){
     $titre=$_GET['film'];
     $date=$_GET['date'];
     $genre=$_GET['type'];
@@ -93,6 +93,8 @@ if($_GET['genre']==="film"){
             header('Location: Admin.php');
     }
 }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if($_GET['genre']==="genre"){
     $libelle=$_GET['libelle'];
