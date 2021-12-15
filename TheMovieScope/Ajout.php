@@ -3,11 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Nom du site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
 
 <body>
-<a href="Admin.php">Retour</a>
+
+
+
+<nav>
+    <div class="navbar">
+        <div class="logo"><a>TheMovieScope</a></div>
+        <div class="nav-links">
+            <ul class="links">
+                <li><a href="Admin.php">Retour</a></li>
+                <li><a href="Profil.php">Profil</a></li>
+                <li><a href="Index.php">Déconnexion</a></li>
+            </ul>
+        </div>
+        <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70" /></a></div>
+    </div>
+
+
+
+<div id="modif_div">
+
 <?php
 if($_GET['action']==="film"){echo '<div>
     <form action="Ajout.php?action=film" method="post">
@@ -50,9 +72,13 @@ if($_GET['action']==="film"){echo '<div>
         echo('<option name="artiste" value="'.$donnee['idArtiste'].'">'.$donnee['prenom'].' '.$donnee['nom'].'</option>');
     }
     echo'</select></td>
+        
+                    </tr>
+                    <td><label>Résumé</label></td><td><input name="resume" rows="3" cols="50"></textarea></td>
+                    <td><label>Image</label></td><td><input type="url" placeholder="URL" name="image"></td>
+                
             </tr>
-                <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
-            </tr>
+            <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
         </table>
     </form>
 </div></body></html>';
@@ -61,18 +87,18 @@ if($_GET['action']==="film"){echo '<div>
         $annee=$_POST['annee'];
         $Artiste=$_POST['artiste'];;
         $Genre=$_POST['genre'];
-        if($titre!=""||$annee!=""){
+        $resume=$_POST['resume'];
+        $image=$_POST['image'];
             try {
                 $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
             } catch (Exception $e) {
                 die('Erreur de connexion : ' . $e->getMessage());
             }
 //preparation de la requête avec les variables $_POST du formulaire
-            $req = $bdd->prepare('INSERT INTO film (titre, annee, Artiste_idRealisateur, Genre_idGenre) VALUES (?,?, ?,?);');
-            $req->execute([$titre,$annee,$Artiste,$Genre]) or die(print_r($req->errorInfo()));
-            header('Location: Admin.php');
+            $req = $bdd->prepare('INSERT INTO film (titre, annee,resume, Artiste_idRealisateur, Genre_idGenre,image) VALUES (?,?,?,?,?,?);');
+            $req->execute([$titre,$annee,$resume,$Artiste,$Genre,$image]) or die(print_r($req->errorInfo()));
+            header('Location: Admin.php?menu=film');
         }
-    }
 }
 
 if($_GET['action']==="genre"){echo'
@@ -80,14 +106,14 @@ if($_GET['action']==="genre"){echo'
     <form action="Ajout.php?action=genre" method="post">
         <table>
             <tr>
-                <td><label>Libelle</label></td>
+                <td><label>Genre</label></td>
                 <td ><input name="libelle"></td>
             </tr>
                 <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
             </tr>
         </table>
     </form>
-</div></body></html>';
+</div>';
 if(isset($_POST['libelle'])){
         $libelle=$_POST['libelle'];
             try {
@@ -98,7 +124,8 @@ if(isset($_POST['libelle'])){
 //preparation de la requête avec les variables $_POST du formulaire
             $req = $bdd->prepare('INSERT INTO genre (libelle) VALUES (?);');
             $req->execute([$libelle]) or die(print_r($req->errorInfo()));
-            header('Location: Admin.php');}
+            header('Location: Admin.php?menu=genre');
+}
 }
 
 if($_GET['action']==="artiste"){echo'<div>
@@ -120,14 +147,12 @@ if($_GET['action']==="artiste"){echo'<div>
             </tr>
         </table>
     </form>
-</div></body></html>';
+</div>';
 if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
 
     $nom=$_POST['nom'];
     $prenom=$_POST['prenom'];
     $date=$_POST['date'];
-
-    if($nom!=""&&$prenom!=""){
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
         } catch (Exception $e) {
@@ -136,7 +161,12 @@ if(isset($_POST['nom'])&&isset($_POST['prenom'])&&isset($_POST['date'])){
 //preparation de la requête avec les variables $_POST du formulaire
         $req = $bdd->prepare('INSERT INTO artiste (nom,prenom,dateNaiss) VALUES (?,?,?);');
         $req->execute([$nom,$prenom,$date]) or die(print_r($req->errorInfo()));
-        header('Location: Admin.php');
+        header('Location: Admin.php?menu=artiste');
     }
-}}
+}
 ?>
+
+</div>
+</nav>
+</body>
+</html>
