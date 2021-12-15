@@ -39,7 +39,7 @@ catch(Exception $e){
 $rep = $bdd->query('SELECT * FROM cinema.film INNER JOIN cinema.genre ON film.Genre_idGenre = genre.idGenre INNER JOIN cinema.artiste ON film.Artiste_idRealisateur=artiste.idArtiste WHERE idFilm='.$id.' ;');
 while($donnee = $rep->fetch())
 {
-    echo '<tr><td rowspan="5"><img alt="Cet artiste ne possède pas d\'illustration" height="300px" width="200px" src="'.$donnee[6].'"></td>';
+    echo '<tr><td rowspan="5"><img alt="Ce film ne possède pas d\'illustration" height="300px" width="200px" src="'.$donnee[6].'"></td>';
     echo '<td><h1>'.$donnee['titre'].'</h1></td>';
     echo '<td  width="450" rowspan="5">'.utf8_encode($donnee['resume']).'</td></tr>';
     echo '<tr><td>'.$donnee['annee'].' - '.$donnee['libelle'].'</td></tr>';
