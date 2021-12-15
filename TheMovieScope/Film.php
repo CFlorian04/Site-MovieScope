@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>The Movie Scope</title>
+    <title>TheMovieScope - Film</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
@@ -31,8 +31,8 @@ while($donnee = $rep->fetch())
     echo '<th>DATE DE SORTIE</th><tr align="center"><td>'.$donnee['annee'].'</td></tr>';
     echo '<th>RESUME</th><tr align="center"><td>'.utf8_encode($donnee['resume']).'</td></tr>';
     if($_SESSION['admin']==1){
-    echo '<tr><td><a href="Suppression.php?id='.$donnee['idFilm'].'&genre=film"><button>Supprimer</button></a></td>';
-    echo '<td><a href="Modification.php?id='.$donnee['idFilm'].'&film='.$donnee['titre'].'&genre=film&date='.$donnee['annee'].'&type='.$donnee['libelle'].'&artiste='.$donnee['prenom']." ".$donnee['nom'].'&resume='.urlencode($donnee['resume']).'&image='.$donnee[6].'"><button>Modifier</button></a></td></tr>';
+    echo '<tr><td><a href="Suppression.php?id='.$donnee['idFilm'].'&genre=film"><button id="bouton">Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idFilm'].'&film='.$donnee['titre'].'&genre=film&date='.$donnee['annee'].'&type='.$donnee['libelle'].'&artiste='.$donnee['prenom']." ".$donnee['nom'].'&resume='.urlencode($donnee['resume']).'&image='.$donnee[6].'"><button id="bouton">Modifier</button></a></td></tr>';
     }
 }
 echo'<th>NOTE TOTAL</th>';

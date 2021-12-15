@@ -220,21 +220,6 @@ li button{
     font-weight: 500;
 }
 
-button[id="bouton"]
-{
-    background: none;
-    border: 4px solid #fff;
-    border-radius: 5px;
-    color: #fff;
-    display: block;
-    font-size: 0.8em;
-    font-weight: bold;
-    margin: 10px auto;
-    padding: 2em 6em;
-    position: relative;
-    text-transform: uppercase;
-}
-
 table {
     margin-left: 20px;
 }
@@ -247,18 +232,19 @@ table td h5 {
     text-align: center;
 }
 
-input[type=button]{
-    background: none;
+input[type=button],button[id="bouton"]{
+    background: #000000;
     border: 4px solid #fff;
     border-radius: 5px;
-    color: #fff;
+    color: #ffffff;
     display: block;
     font-size: 0.8em;
     font-weight: bold;
-    margin: 10px auto;
-    padding: 2em 6em;
+    margin: 5px auto;
+    padding: 1em 1em;
     position: relative;
     text-transform: uppercase;
+    
 }
 
 select, option{
