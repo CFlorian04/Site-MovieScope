@@ -70,24 +70,39 @@ catch(Exception $e){
 
 //////////////////////////////////////////////////////////Requete pour afficher les films/////////////////////////////////////////////////////////////////////////////////////////////
 
-echo'<table id="table_film" style="display: none">';
+echo'<table id="table_film" style="display: none"><tr>';
 $rep = $bdd->query('SELECT * FROM cinema.film ;');
+$i =0;
 while($donnee = $rep->fetch())
 {
+    if($i > 6)
+    {
+        echo '</tr><tr>';
+        $i=0;
+    }
+
     if($donnee['image'] == null)
         $donnee['image'] = "assets/img/no_image_available.png";
     echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['titre'].'" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="'.$donnee['image'].'"></a><h5>'.$donnee['titre'].'</h5></td>';
+    $i++;
 }
-echo'</table>';
+echo'</tr></table>';
 //////////////////////////////////////////////////////////Requete pour afficher les artistes/////////////////////////////////////////////////////////////////////////////////////////////
 $rep = $bdd->query('SELECT * FROM cinema.artiste;');
 echo'<table id="table_artiste" style="display: none">';
+$i=0;
 while($donnee = $rep->fetch())
 {
+    if($i > 8)
+    {
+        echo '</tr><tr>';
+        $i=0;
+    }
     if($donnee['image'] == null)
         $donnee['image'] = "assets/img/no_image_available.png";
 
     echo '<td><a href="Artiste.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a><h5>'.$donnee['prenom']." ".$donnee['nom'].'</h5></td>';
+    $i++;
 }
 echo'</table>';
 
