@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: URW Chancery L, cursive;
+    font-family: 'Poppins', cursive;
     color: #ffffff;
 }
 body{
@@ -211,6 +211,8 @@ nav .navbar .links li:hover .js-sub-menu{
     }
 }
 
+
+
 li button{
     background-color: #313136 ;
     border: none;
@@ -224,6 +226,8 @@ button
 {
     border: none;
 }
+
+
 
 table {
     margin-left: 20px;

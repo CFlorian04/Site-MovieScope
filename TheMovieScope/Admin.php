@@ -6,6 +6,8 @@ if(isset($_SESSION['admin'])){
     }}
 else
     header('location:Index.php');
+
+
 if(isset($_GET['menu']))
     $menu=$_GET['menu'];
 else
