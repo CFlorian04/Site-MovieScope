@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream:Site_cinema/.idea/workspace.xml
     <list default="true" id="3d206f65-3ae2-4202-8b5b-fae17599fb2a" name="Changes" comment="" />
+=======
+    <list default="true" id="0884a023-cb7d-4399-817e-49013ad9c3e5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/navbar.css" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes:TheMovieScope/.idea/workspace.xml
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +32,7 @@
   </component>
   <component name="PhpServers">
     <servers>
+<<<<<<< Updated upstream:Site_cinema/.idea/workspace.xml
       <server host="github/" id="91937853-e82b-4110-8a74-d059eea0cd9a" name="cinema" />
     </servers>
   </component>
@@ -33,6 +41,14 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+=======
+      <server host="http://github" id="da5ac4f4-5c36-481b-9acb-6ad72bc7d390" name="Unnamed" />
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="WAMP PHP" />
+  <component name="ProjectId" id="22CRWgR3vIHyqy56Gp5CgwGt96c" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> Stashed changes:TheMovieScope/.idea/workspace.xml
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,9 +62,10 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+<<<<<<< Updated upstream:Site_cinema/.idea/workspace.xml
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Florian\Documents\GitHub\Site-Film\Site_cinema\Site_cinema" />
@@ -57,6 +74,10 @@
   </component>
   <component name="RunManager">
     <configuration name="Cinema" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="cinema" start_url="/Site-Film/Site_cinema">
+=======
+  <component name="RunManager">
+    <configuration name="Unnamed" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" nameIsGenerated="true" server_name="Unnamed" start_url="/Site-Film/TheMovieScope/">
+>>>>>>> Stashed changes:TheMovieScope/.idea/workspace.xml
       <method v="2" />
     </configuration>
   </component>
@@ -67,6 +88,7 @@
       <created>1638287285149</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< Updated upstream:Site_cinema/.idea/workspace.xml
       <updated>1638287285149</updated>
       <workItem from="1638287286898" duration="616000" />
       <workItem from="1638348147040" duration="8393000" />
@@ -77,6 +99,16 @@
       <workItem from="1638645810159" duration="7000" />
       <workItem from="1638645900447" duration="184000" />
       <workItem from="1638647360916" duration="886000" />
+=======
+      <updated>1639339615412</updated>
+      <workItem from="1639339616714" duration="3802000" />
+      <workItem from="1639417543137" duration="1332000" />
+      <workItem from="1639418959216" duration="24000" />
+      <workItem from="1639418986601" duration="1000" />
+      <workItem from="1639568251516" duration="913000" />
+      <workItem from="1639569179624" duration="2000" />
+      <workItem from="1639573609358" duration="2697000" />
+>>>>>>> Stashed changes:TheMovieScope/.idea/workspace.xml
     </task>
     <servers />
   </component>
