@@ -98,8 +98,8 @@ echo'<table id="table_genre" style="display: none">
 while($donnee = $rep->fetch())
 {
     echo '<tr><td>'.$donnee['libelle'].'</td>';
-    echo '<td><a href="Suppression.php?id='.$donnee['idGenre'].'&genre=genre"><button>Supprimer</button></a></td>';
-    echo '<td><a href="Modification.php?id='.$donnee['idGenre'].'&genre=genre&libelle='.$donnee['libelle'].'"><button>Modifier</button></a></td></tr>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idGenre'].'&genre=genre"><button id="bouton">Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idGenre'].'&genre=genre&libelle='.$donnee['libelle'].'"><button id="bouton">Modifier</button></a></td></tr>';
 }
 echo'</table>';
 
@@ -116,8 +116,8 @@ while($donnee = $rep->fetch())
     echo '<tr><td>'.$donnee['nom'].'</td>';
     echo '<td>'.$donnee['prenom'].'</td>';
     echo '<td>'.$donnee['admin'].'</td>';
-    echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internautes"><button>Supprimer</button></a></td>';
-    echo '<td><a href="Modification.php?id='.$donnee['idInternaute'].'&nom='.$donnee['nom'].'&prenom='.$donnee['prenom'].'&admin='.$donnee['admin'].'&genre=internautes"><button>Modifier</button></a></td></tr>';
+    echo '<td><a href="Suppression.php?id='.$donnee['idInternaute'].'&genre=internautes"><button id="bouton">Supprimer</button></a></td>';
+    echo '<td><a href="Modification.php?id='.$donnee['idInternaute'].'&nom='.$donnee['nom'].'&prenom='.$donnee['prenom'].'&admin='.$donnee['admin'].'&genre=internautes"><button id="bouton">Modifier</button></a></td></tr>';
 }
 echo'</table>';
 ?>
