@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <script src="js/formulaire.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>The Movie Scope</title>
+    <title>The MovieScope</title>
+    <link rel="icon" href="assets/img/logo_TheMovieScope_HD.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
