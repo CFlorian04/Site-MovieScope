@@ -2,10 +2,11 @@
 <html>
 
 <head>
-
     <meta charset="UTF-8">
-    <title>Nom du site</title>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
 
 <body>
@@ -75,8 +76,9 @@ if($_GET['action']==="film"){echo '<div>
                     </tr>
                     <td><label>Résumé</label></td><td><input name="resume" rows="3" cols="50"></textarea></td>
                     <td><label>Image</label></td><td><input type="url" placeholder="URL" name="image"></td>
-                <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
+                
             </tr>
+            <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
         </table>
     </form>
 </div></body></html>';
@@ -104,7 +106,7 @@ if($_GET['action']==="genre"){echo'
     <form action="Ajout.php?action=genre" method="post">
         <table>
             <tr>
-                <td><label>Libelle</label></td>
+                <td><label>Genre</label></td>
                 <td ><input name="libelle"></td>
             </tr>
                 <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>

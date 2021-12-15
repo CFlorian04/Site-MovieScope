@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
-    <title>Nom du site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
 <body>
 <?php
@@ -21,10 +23,12 @@ catch(Exception $e){
     die('Erreur de connexion : '.$e->getMessage());}
 $rep = $bdd->query('SELECT * FROM cinema.artiste WHERE idArtiste='.$id.';');
 while($donnee = $rep->fetch()) {
-    $age = date("Y-m-d") - $donnee['dateNaiss'] ;
+    if($donnee['image'] == null)
+        $donnee['image'] = "assets/img/no_image_available.png";
+
     echo    '<th><img height="200px" width="150px" src="'.$donnee['image'].'">'.
             '<h2>'.$donnee['prenom'] . ' ' . $donnee['nom'] . '</h2>'.
-            ' Date de naissance :' . $donnee['dateNaiss'] ." (". $age." ans)".''.
+            ' Date de naissance :' . $donnee['dateNaiss'] .
             '</th>';
 
     if ($_SESSION['admin'] == 1) {

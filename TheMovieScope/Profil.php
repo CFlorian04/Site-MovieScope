@@ -10,8 +10,10 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <title>Nom du site</title>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
 <body>
 

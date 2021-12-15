@@ -14,10 +14,12 @@ echo'<div id="menu" style="display: none">'.$menu.'</div>'
 ?>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin</title>
     <script src="js/Affichage.js"></script>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
 <body>
     <nav>
@@ -70,6 +72,8 @@ echo'<table id="table_film" style="display: none">';
 $rep = $bdd->query('SELECT * FROM cinema.film ;');
 while($donnee = $rep->fetch())
 {
+    if($donnee['image'] == null)
+        $donnee['image'] = "assets/img/no_image_available.png";
     echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['titre'].'" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="'.$donnee['image'].'"></a><h5>'.$donnee['titre'].'</h5></td>';
 }
 echo'</table>';
@@ -78,7 +82,10 @@ $rep = $bdd->query('SELECT * FROM cinema.artiste;');
 echo'<table id="table_artiste" style="display: none">';
 while($donnee = $rep->fetch())
 {
-    echo '<td><a href="Artiste.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a> <h5>'.$donnee['prenom']." ".$donnee['nom'].'</h5></td>';
+    if($donnee['image'] == null)
+        $donnee['image'] = "assets/img/no_image_available.png";
+
+    echo '<td><a href="Artiste.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a><h5>'.$donnee['prenom']." ".$donnee['nom'].'</h5></td>';
 }
 echo'</table>';
 

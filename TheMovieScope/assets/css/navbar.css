@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    color: #ffffff;
 }
 body{
     min-height: 100vh;
@@ -236,3 +237,6 @@ table td h5 {
     text-align: center;
 }
 
+input, select, option, button{
+    color: #000000;
+}
