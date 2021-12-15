@@ -1,96 +1,122 @@
-<html lang="fr">
-<head>
-    <meta charset="UTF-8-UNICODE">
-    <title>Internaute</title>
-</head>
-<body>
-<div id="logo">
-    <img src="">
-    <h1>Nom du site</h1>
-</div>
-<div>
-    <table>
-        <tr>
-
-            <th><button onclick="Menu_film()" id="film">Film</button></th>
-            <th><button onclick="Menu_artiste()" id="artiste">Artiste</button></th>
-            <th><button onclick="">Profil</button></th>
-        </tr>
-    </table>
-</div>
 <?php
 session_start();
-//Requete pour afficher les films
-echo'<table id="table_film" style="display: none">
-    <tr>
-        <th>TITRE</th>
-        <th>GENRE</th>
-        <th>RÉALISATEUR</th>
-        <th>DATE DE SORTIE</th>
-        <th>RESUME</th>
-    </tr>';
-
-try{
-    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
-}
-catch(Exception $e){
-    die('Erreur de connexion : '.$e->getMessage());}
-$rep = $bdd->query('SELECT * FROM cinema.film INNER JOIN cinema.genre ON film.Genre_idGenre = genre.idGenre INNER JOIN cinema.artiste ON film.Artiste_idRealisateur=artiste.idArtiste;');
-while($donnee = $rep->fetch())
-{
-    echo '<tr>';
-    echo '<td>'.$donnee['titre'].'</td>';
-    echo '<td>'.$donnee['libelle'].'</td>';
-    echo '<td>'.$donnee['prenom']." ".$donnee['nom'].'</td>';
-    echo '<td>'.$donnee['annee'].'</td>';
-    echo '<td>'.utf8_encode($donnee['resume']).'</td>';
-    echo '<td><a href="InternauteModif.php?id='.$donnee['idFilm'].'&film='.$donnee['titre'].'&genre=film&date='.$donnee['annee'].'&type='.$donnee['libelle'].'&artiste='.$donnee['prenom']." ".$donnee['nom'].'&resume='.urlencode($donnee['resume']).'"><button>Modifier</button></a></td>';
-    echo '</tr>';
-}
-echo'</table>';
-
-//Requete pour afficher les artistes
-echo'<table id="table_artiste" style="display: none">
-    <tr>
-        <th>NOM</th>
-        <th>PRÉNOM</th>
-        <th>DATE DE NAISSANCE</th>
-    </tr>';
-
-try{
-    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
-}
-catch(Exception $e){
-    die('Erreur de connexion : '.$e->getMessage());}
-$rep = $bdd->query('SELECT * FROM cinema.artiste;');
-while($donnee = $rep->fetch())
-{
-    echo '<tr>';
-    echo '<td>'.$donnee['nom'].'</td>';
-    echo '<td>'.$donnee['prenom'].'</td>';
-    echo '<td>'.$donnee['dateNaiss'].'</td>';
-    echo '</tr>';
-}
-echo'</table>';
-
+if(isset($_SESSION['admin'])){
+if ($_SESSION['admin'] == 1 ) {
+header('location:Admin.php');
+}}
+else
+header('location:Index.php');
+if(isset($_GET['menu']))
+$menu=$_GET['menu'];
+else
+$menu="film";
+echo'<div id="menu" style="display: none">'.$menu.'</div>'
 ?>
-<script>
-    function Menu_film() {
-        if(document.getElementById("film")){
-            document.getElementById("table_film").setAttribute("style","display:block");
-            document.getElementById("table_artiste").setAttribute("style","display:none");
-            document.getElementById("table_genre").setAttribute("style","display:none");
-            document.getElementById("table_internautes").setAttribute("style","display:none");
-        }
-    }
-    function Menu_artiste() {
-        if(document.getElementById("artiste")){
-            document.getElementById("table_artiste").setAttribute("style","display:block");
-            document.getElementById("table_film").setAttribute("style","display:none");
-            document.getElementById("table_genre").setAttribute("style","display:none");
-            document.getElementById("table_internautes").setAttribute("style","display:none");
-        }
-    }
+<html lang="fr">
+<head>
+    <script src="js/Affichage.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>The Movie Scope</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+</head>
+<body>
+<nav>
+<div class="navbar">
+<div class="logo"><a>TheMovieScope</a></div>
+<div class="nav-links">
+    <ul class="links">
+        <li><button onclick="Menu_film()">Films</button></li>
+        <li><button onclick="Menu_artiste()">Artistes</button></li>
+        <li>
+            <button onclick="Menu_genre()">Genre</button>
+            <i class='bx bxs-chevron-down arrow '></i>
+            <ul class="js-sub-menu sub-menu">
+                <?php
+                try{
+                    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+                }
+                catch(Exception $e){
+                    die('Erreur de connexion : '.$e->getMessage());}
+                $rep = $bdd->query('SELECT * FROM cinema.genre;');
+                while($donnee = $rep->fetch()) {
+                    echo '<li><a href="Internaute.php?menu=genre&genrefilm='.$donnee['libelle'].'">'.$donnee['libelle'].'</a></li>';
+                }
+                ?>
+            </ul>
+        </li>
+        <li><a href="Profil.php">Profil</a></li>
+        <li><a href="Index.php">Déconnexion</a></li>
+    </ul>
+</div>
+<div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70" /></a></div>
+</div>
 
-</script>
+<?php
+try{
+$bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+}
+catch(Exception $e){
+die('Erreur de connexion : '.$e->getMessage());}
+
+//////////////////////////////////////////////////////////Requete pour afficher les films/////////////////////////////////////////////////////////////////////////////////////////////
+
+echo'<table id="table_film" style="display: none">';
+$rep = $bdd->query('SELECT * FROM cinema.film ;');
+while($donnee = $rep->fetch())
+{
+    if($donnee['image'] == null)
+        $donnee['image'] = "assets/img/no_image_available.png";
+echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['titre'].'" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="'.$donnee['image'].'"></a></a><h5>'.$donnee['titre'].'</h5></td>';
+}
+echo'</table>';
+//////////////////////////////////////////////////////////Requete pour afficher les artistes/////////////////////////////////////////////////////////////////////////////////////////////
+$rep = $bdd->query('SELECT * FROM cinema.artiste;');
+echo'<table id="table_artiste" style="display: none">';
+while($donnee = $rep->fetch())
+{
+    if($donnee['image'] == null)
+        $donnee['image'] = "assets/img/no_image_available.png";
+echo '<td><a href="Artiste.php?id='.$donnee["idArtiste"].'"><img title="'.$donnee['prenom']." ".$donnee['nom'].'" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="'.$donnee['image'].'"></a><h5>'.$donnee['prenom']." ".$donnee['nom'].'</h5></td>';
+}
+echo'</table>';
+
+//////////////////////////////////////////////////////////Requete pour afficher les genres/////////////////////////////////////////////////////////////////////////////////////////////
+if(isset($_GET["genrefilm"])){
+$rep = $bdd->query('SELECT * FROM cinema.film INNER JOIN cinema.genre ON film.Genre_idGenre = genre.idGenre  where libelle="'.$_GET["genrefilm"].'";');
+
+echo'<table id="table_genre">';
+if($rep->rowCount()<=0) {
+    echo '<td>Il n\'existe pas de film de ce genre</td>';
+}
+while($donnee = $rep->fetch())
+{
+if($donnee["idFilm"]==NULL)
+    echo'qcs';
+echo '<td><a href="Film.php?id='.$donnee["idFilm"].'"><img title="'.$donnee['titre'].'" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="'.$donnee['image'].'"></a></td>';
+}
+echo'</table>';}
+?>
+
 </body>
+</nav>
+<script>
+if(document.getElementById("menu").outerText==="film"){
+Menu_film();
+}
+
+if(document.getElementById("menu").outerText==="artiste"){
+Menu_artiste();
+}
+
+if(document.getElementById("menu").outerText==="genre"){
+Menu_genre();
+}
+
+if(document.getElementById("menu").outerText==="internautes"){
+Menu_internaute();
+}
+</script>
+
+</html>
