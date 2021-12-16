@@ -10,16 +10,19 @@
 <body>
 <?php
 session_start();
-try{
-    $bdd = new PDO('mysql:host=localhost;dbname=cinema','root','');
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
 }
-catch(Exception $e){die('Erreur de connexion : '.$e->getMessage());}
+catch (Exception $e) {
+    die('Erreur de connexion : ' . $e->getMessage());
+}
 
-$id=$_GET['id'];
-echo'<a href="Film.php?id='.$id.'">Retour</a>';
+$id = $_GET['id'];
+echo '<a href="Film.php?id=' . $id . '">Retour</a>';
 
+//Formulaire de notation des films
 echo '<div>
-    <form action="Noter.php?id='.$id.'" method="post" accept-charset="UTF-8">
+    <form action="Noter.php?id=' . $id . '" method="post" accept-charset="UTF-8">
         Mon commentaire</br>
         <textarea name="commentaire" rows="4" cols="50"></textarea></br>
           </select></td>
@@ -43,11 +46,11 @@ echo '<div>
         <input type="button" value="Poster" onclick="this.form.submit()">
     </form>
 </div></body></html>';
-$user=$_SESSION['donnee']['idInternaute'];
-if(isset($_POST['commentaire'])){
-    $commentaire=utf8_decode($_POST['commentaire']);
-    $note=$_POST['note'];
-    $req = $bdd->prepare('INSERT IGNORE INTO cinema.noter(Internaute_idInternaute,Film_idFilm,note,commentaire) VALUES (?, ?, ?,?)');
-    $req->execute([$user,$id,$note,$commentaire]) or die(print_r($req->errorInfo()));
-    header('Location: Film.php?id='.$id.'');
+$user = $_SESSION['donnee']['idInternaute'];
+if (isset($_POST['commentaire'])) {
+    $commentaire = utf8_decode($_POST['commentaire']);
+    $note        = $_POST['note'];
+    $req         = $bdd->prepare('INSERT IGNORE INTO cinema.noter(Internaute_idInternaute,Film_idFilm,note,commentaire) VALUES (?, ?, ?,?)');
+    $req->execute([$user, $id, $note, $commentaire]) or die(print_r($req->errorInfo()));
+    header('Location: Film.php?id=' . $id . '');
 }
