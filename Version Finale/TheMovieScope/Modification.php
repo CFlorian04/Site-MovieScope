@@ -11,7 +11,7 @@ if (isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>The Movie Scope</title>
+    <title>Modifier - TheMovieScope</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
@@ -22,7 +22,7 @@ if (isset($_SESSION['admin'])) {
         <div class="logo"><a>TheMovieScope</a></div>
         <div class="nav-links">
             <ul class="links">
-                <li><a href="Admin.php">Retour</a></li>
+                <li><a href="Admin.php">Accueil</a></li>
                 <li><a href="Profil.php">Profil</a></li>
                 <li><a href="Index.php">Déconnexion</a></li>
             </ul>

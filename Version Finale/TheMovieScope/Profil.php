@@ -10,7 +10,7 @@ session_start();
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>The Movie Scope</title>
+        <title>Profil - TheMovieScope</title>
         <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="stylesheet" href="assets/css/navbar.css">
     </head>
@@ -22,7 +22,7 @@ session_start();
             <div class="logo"><a>TheMovieScope</a></div>
             <div class="nav-links">
                 <ul class="links">
-                    <li><a href="Admin.php">Retour</a></li>
+                    <li><a href="Admin.php">Accueil</a></li>
                     <li><a href="Index.php">Déconnexion</a></li>
                 </ul>
             </div>

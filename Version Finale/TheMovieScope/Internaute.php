@@ -18,7 +18,7 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
     <script src="js/Affichage.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>The Movie Scope</title>
+    <title>Menu - TheMovieScope</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
 </head>
