@@ -29,13 +29,6 @@ if ($donnee['email'] == $email) {
     header('Location: Index.php?inscription=2');
 }
 else {
-    //connexion bdd
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-    }
-    catch (Exception $e) {
-        die('Erreur de connexion : ' . $e->getMessage());
-    }
 
     //preparation de la requête avec les variables $_POST du formulaire
     $req = $bdd->prepare('INSERT INTO internaute (prenom,nom,email,password,admin) VALUES (?, ?, ?, ?, 0)');

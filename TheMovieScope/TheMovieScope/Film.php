@@ -72,7 +72,10 @@ while ( $donnee = $rep->fetch() ) {
     $rep = $bdd->query('SELECT * FROM cinema.film LEFT JOIN  cinema.noter ON idFilm=Film_idFilm  LEFT JOIN cinema.internaute ON idInternaute=Internaute_idInternaute WHERE idFilm=' . $id . ' ;');
     while ( $donnee = $rep->fetch() ) {
         if ($donnee['commentaire'] != NULL) {
-            echo '<tr><td><strong>' . $donnee['nom'] . " " . $donnee['prenom'] . '<p></p>' . $donnee['note'] . '/10</strong></td><td>' . utf8_encode($donnee['commentaire']) . '</td></tr></div>';
+            echo '<tr><td><strong>' . $donnee['nom'] . " " . $donnee['prenom'] . '<p></p>' . $donnee['note'] . '/10</strong></td><td>' . utf8_encode($donnee['commentaire']);
+            if($_SESSION['donnee']['idInternaute'] == $donnee['Internaute_idInternaute'])
+                echo '<td><a href="Suppression.php?id=' . $donnee['Internaute_idInternaute'] . '&idFilm=' . $id . '&genre=commentaire"><button id="bouton">Supprimer</button></a>';
+            echo '</td></tr></div>';
         }
     }
     if ($_SESSION['admin'] == 0) {

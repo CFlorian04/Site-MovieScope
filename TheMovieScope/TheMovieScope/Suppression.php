@@ -2,16 +2,17 @@
 session_start();
 $id = $_GET['id'];
 
+//connexion bdd
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+}
+catch (Exception $e) {
+    die('Erreur de connexion : ' . $e->getMessage());
+}
 
 //Suppression d'un film
 if ($_GET['genre'] == "film") {
-//connexion bdd
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-    }
-    catch (Exception $e) {
-        die('Erreur de connexion : ' . $e->getMessage());
-    }
+
     //preparation de la requête avec les variables $_POST du formulaire
     $req = $bdd->prepare('DELETE FROM film WHERE (idFilm = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
@@ -23,13 +24,7 @@ if ($_GET['genre'] == "film") {
 
 //Suppression d'un genre
 if ($_GET['genre'] == "genre") {
-//connexion bdd
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-    }
-    catch (Exception $e) {
-        die('Erreur de connexion : ' . $e->getMessage());
-    }
+
     //preparation de la requête avec les variables $_POST du formulaire
     $requete = $bdd->prepare('DELETE FROM film WHERE (Genre_idGenre = ?);');
     $requete->execute([$id]) or die(print_r($requete->errorInfo()));
@@ -41,33 +36,32 @@ if ($_GET['genre'] == "genre") {
 
 //Suppression d'un internaute
 if ($_GET['genre'] == "internautes") {
-//connexion bdd
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-    }
-    catch (Exception $e) {
-        die('Erreur de connexion : ' . $e->getMessage());
-    }
+    $req = $bdd->prepare('DELETE FROM noter WHERE (Internaute_idInternaute = ?);');
+    $req->execute([$id]) or die(print_r($req->errorInfo()));
     $req = $bdd->prepare('DELETE FROM internaute WHERE (idInternaute = ?);');
     $req->execute([$id]) or die(print_r($req->errorInfo()));
     header('Location: Admin.php?menu=internautes');
-
 }
 
 //Suppression d'un artiste
 if ($_GET['genre'] == "artiste") {
-//connexion bdd
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+    $req = $bdd->query('SELECT * FROM cinema.film WHERE Artiste_idRealisateur='.$id.';');
+    while ( $donnee = $req->fetch() ) {
+        echo $donnee['idFilm'];
+        $bdd->query('DELETE FROM noter WHERE (Film_idFilm = '.$donnee['idFilm'].');');
+        $bdd->query('DELETE FROM film WHERE (idFilm = '.$donnee['idFilm'].');');
     }
-    catch (Exception $e) {
-        die('Erreur de connexion : ' . $e->getMessage());
-    }
-    $req = $bdd->prepare('DELETE FROM film WHERE (Artiste_idRealisateur = ?);');
-    $req->execute([$id]) or die(print_r($req->errorInfo()));
-
     $requete = $bdd->prepare('DELETE FROM artiste WHERE (idArtiste = ?);');
     $requete->execute([$id]) or die(print_r($requete->errorInfo()));
     header('Location: Admin.php?menu=artiste');
+}
+
+if ($_GET['genre'] == "commentaire") {
+
+    $idFilm = $_GET['idFilm'];
+
+    $requete = $bdd->prepare('DELETE FROM noter WHERE (Internaute_idInternaute = ?) AND (Film_idFilm = ?);');
+    $requete->execute([$id,$idFilm]) or die(print_r($requete->errorInfo()));
+    header('Location: Film.php?id='.$idFilm.'');
 
 }

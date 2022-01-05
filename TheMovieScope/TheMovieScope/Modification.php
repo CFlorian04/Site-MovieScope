@@ -210,6 +210,11 @@ if (isset($_SESSION['admin'])) {
             $req    = $bdd->prepare('UPDATE internaute SET nom = ?, prenom = ?, admin = ? WHERE (`idInternaute` = ?);');
             $req->execute([$nom, $prenom, $admin, $id]) or die(print_r($req->errorInfo()));
             header('Location: Admin.php?menu=internaute');
+
+            if($id == $_SESSION['donnee']['idInternaute'])
+            {
+                header('Location: Index.php');
+            }
         }
     }
     ?>
