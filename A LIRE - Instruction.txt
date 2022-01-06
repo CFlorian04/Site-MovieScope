@@ -15,19 +15,24 @@ Possibilités et Fonctionnalités
 
 Internaute :
     - Navigation entre les films, les réalisateurs et les genres
-    - Poster un commentaire sur les films
-    - Changer
+    - Poster un avis sur un film
+    - Modifier ou supprimer son compte
+
+Admin :
+    - Les Fonctionnalités d'Internaute +
+    - Ajouter des films, des artistes et des genres
+    - Modifier et Supprimer des films, des artistes, des genres et des internautes
 
 
 #####################################
 
 Explication des fichiers :
 
-	- Affichage.js 	    -> Affiche les différentes <div> dans Admin.php et Internaute.php
+	- Affichage.js 	    -> Affiche les différentes <div> dans Admin.php et Internaute.php en fonction du menu choisi
 	- formulaire.js 	-> Vérifie la complétion du <form> d'inscription et de connexion et se charge de leurs affichages
 	- Admin.php 	    -> Page de contrôle pour un administrateur
 	- Ajout.php		    -> Affiche les formulaires d'ajout pour film/artiste/genre
-	- APropos.php		-> Affiche les formulaires d'ajout pour film/artiste/genre
+	- APropos.php		-> Contient le lien vers le projet GITHUB
 	- Artiste.php 	    -> Affiche les informations détaillées d'un artiste sélectionné
 	- Création.php	    -> Crée un compte internaute après la réponse de formulaire.js
  	- Film.php		    -> Affiche les informations détaillées d'un film sélectionné
@@ -36,7 +41,7 @@ Explication des fichiers :
 	- Modification.php  -> Affiche les formulaires de modification pour film/artiste/genre/internaute
 	- Noter.php		    -> Affiche un formulaire de notation de film pour un internaute
 	- Profil.php	    -> Affiche un formulaire de modification de profil
-	- Suppression.php	-> Supprime le film/artiste/genre sélectionné
+	- Suppression.php	-> Supprime le film/artiste/genre/internaute/commentaire sélectionné
 	- Traitement.php	-> Vérifie les données du <form> de connexion et redirige sur Admin.php ou Internaute.php
 
 #####################################
