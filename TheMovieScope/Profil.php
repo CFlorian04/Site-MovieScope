@@ -54,7 +54,11 @@ echo '<div id="modif_div">
             <td><input type="button" value="Modifier" onclick="this.form.submit()"></td>
             </tr>
         </table>
-    </form>
+    </form>';
+
+echo '<tr><td colspan="2"><a href="Suppression.php?id=' . $_SESSION['donnee']['idInternaute'] . '&genre=internautes"><button id="bouton">Supprimer votre compte</button></a><br>
+    
+
 </div>
 </nav>
 </body>

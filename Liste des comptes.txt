@@ -1,0 +1,17 @@
+PROJET TEST :
+		TheMovieScope
+
+#####################################
+
+    email                                   password            admin
+
+mohammed.tobji@lycee-jeanrostand.fr         tobji1234           Oui
+mohamed.madani@lycee-jeanrostand.fr         madani1111          Non
+admin                                       1234                Oui
+internaute                                  1234                Non
+flo.dauv@orange.fr                          1234                Oui
+
+#####################################
+
+DAUVERGNE Florian / AHMED-SALIH Hazim / CODEBECQ Florian
+BTS SNIR2

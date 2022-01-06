@@ -53,6 +53,50 @@
                 <td><a href="Modification.php?id=' . $donnee['idArtiste'] . '&genre=artiste&nom=' . $donnee['nom'] . '&prenom=' . $donnee['prenom'] . '&date=' . $donnee['dateNaiss'] . '"><button>Modifier</button></a></td>';
         }
     }
+
+
+    echo '<table><th colspan="10">FILMS</th><tr>';
+    $rep = $bdd->query('SELECT * FROM cinema.film WHERE Artiste_idRealisateur = '.$id.';');
+    $i   = 0;
+    while ( $donnee = $rep->fetch() ) {
+        if ($i > 6) {
+            echo '</tr><tr>';
+            $i = 0;
+        }
+
+
+        if ($donnee['image'] == null)
+            $donnee['image'] = "assets/img/no_image_available.png";
+
+        $ti = 25;
+        if(strlen($donnee['titre']) >= $ti)
+        {
+            $donnee['titre'][$ti-4] = " ";
+            for($k = $ti-3; $k<$ti; $k++)
+            {
+                $donnee['titre'][$k] = ".";
+            }
+
+            for($k = $ti; $k < strlen($donnee['titre']); $k++)
+            {
+                $donnee['titre'][$k] = null;
+            }
+
+        }
+
+
+        //Affichage des affiches de films avec un lien cliquable et leurs noms
+        echo '<td><a href="Film.php?id=' . $donnee["idFilm"] . '"><img title="' . $donnee['titre'] . '" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="' . $donnee['image'] . '"></a><h5>' . $donnee['titre'] . '</h5></td>';
+        $i++;
+    }
+    echo '</tr></table>';
+
+
+
+
+
+
+
     ?>
 </nav>
 </table>

@@ -1,0 +1,45 @@
+		PROJET TEST :
+		TheMovieScope
+
+#####################################
+
+Pour accéder correctement au site :
+
+	- Utiliser la base de données modifiée présente dans ce dossier
+	- Lancer le site via la page Index.php
+
+#####################################
+Possibilités et Fonctionnalités
+
+- Inscription et Connexion
+
+Internaute :
+    - Navigation entre les films, les réalisateurs et les genres
+    - Poster un commentaire sur les films
+    - Changer
+
+
+#####################################
+
+Explication des fichiers :
+
+	- Affichage.js 	    -> Affiche les différentes <div> dans Admin.php et Internaute.php
+	- formulaire.js 	-> Vérifie la complétion du <form> d'inscription et de connexion et se charge de leurs affichages
+	- Admin.php 	    -> Page de contrôle pour un administrateur
+	- Ajout.php		    -> Affiche les formulaires d'ajout pour film/artiste/genre
+	- APropos.php		-> Affiche les formulaires d'ajout pour film/artiste/genre
+	- Artiste.php 	    -> Affiche les informations détaillées d'un artiste sélectionné
+	- Création.php	    -> Crée un compte internaute après la réponse de formulaire.js
+ 	- Film.php		    -> Affiche les informations détaillées d'un film sélectionné
+	- Index.php		    -> Page d'accueil du site permettant de s'inscrire
+	- Internaute.php 	-> Page de navigation pour un internaute
+	- Modification.php  -> Affiche les formulaires de modification pour film/artiste/genre/internaute
+	- Noter.php		    -> Affiche un formulaire de notation de film pour un internaute
+	- Profil.php	    -> Affiche un formulaire de modification de profil
+	- Suppression.php	-> Supprime le film/artiste/genre sélectionné
+	- Traitement.php	-> Vérifie les données du <form> de connexion et redirige sur Admin.php ou Internaute.php
+
+#####################################
+
+DAUVERGNE Florian / AHMED-SALIH Hazim / CODEBECQ Florian
+BTS SNIR2

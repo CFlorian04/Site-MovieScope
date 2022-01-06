@@ -54,6 +54,7 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
                 </li>
                 <li><a href="Profil.php">Profil</a></li>
                 <li><a href="Index.php">Déconnexion</a></li>
+                <li><a href="APropos.php">À propos</li>
             </ul>
         </div>
         <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70"/></a></div>
@@ -78,6 +79,23 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
             echo '</tr><tr>';
             $i = 0;
         }
+
+        $ti = 25;
+        if(strlen($donnee['titre']) >= $ti)
+        {
+            $donnee['titre'][$ti-4] = " ";
+            for($k = $ti-3; $k<$ti; $k++)
+            {
+                $donnee['titre'][$k] = ".";
+            }
+
+            for($k = $ti; $k < strlen($donnee['titre']); $k++)
+            {
+                $donnee['titre'][$k] = null;
+            }
+
+        }
+
         if ($donnee['image'] == null)
             $donnee['image'] = "assets/img/no_image_available.png";
         echo '<td><a href="Film.php?id=' . $donnee["idFilm"] . '"><img title="' . $donnee['titre'] . '" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="' . $donnee['image'] . '"></a></a><h5>' . $donnee['titre'] . '</h5></td>';
@@ -93,7 +111,7 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
     while ( $donnee = $rep->fetch() ) {
         if ($donnee['image'] == null)
             $donnee['image'] = "assets/img/no_image_available.png";
-        echo '<td><a href="Artiste.php?id=' . $donnee["idArtiste"] . '"><img title="' . $donnee['prenom'] . " " . $donnee['nom'] . '" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="' . $donnee['image'] . '"></a><h5>' . $donnee['prenom'] . " " . $donnee['nom'] . '</h5></td>';
+        echo '<td><a href="Artiste.php?id=' . $donnee["idArtiste"] . '"><img title="' . $donnee['prenom'] . " " . $donnee['nom'] . '" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="' . $donnee['image'] . '"></a><h5>' . $donnee['prenom'][0] . ". " . $donnee['nom'] . '</h5></td>';
     }
     echo '</table>';
 
@@ -108,10 +126,31 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
             echo '<td>Il n\'existe pas de film de ce genre</td>';
         }
         while ( $donnee = $rep->fetch() ) {
-            if ($donnee["idFilm"] == NULL)
-                echo 'qcs';
-            echo '<td><a href="Film.php?id=' . $donnee["idFilm"] . '"><img title="' . $donnee['titre'] . '" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="' . $donnee['image'] . '"></a></td>';
-        }
+            if ($i > 6) {
+                echo '</tr><tr>';
+                $i = 0;
+            }
+
+            $ti = 25;
+            if(strlen($donnee['titre']) >= $ti)
+            {
+                $donnee['titre'][$ti-4] = " ";
+                for($k = $ti-3; $k<$ti; $k++)
+                {
+                    $donnee['titre'][$k] = ".";
+                }
+
+                for($k = $ti; $k < strlen($donnee['titre']); $k++)
+                {
+                    $donnee['titre'][$k] = null;
+                }
+
+            }
+
+            if ($donnee['image'] == null)
+                $donnee['image'] = "assets/img/no_image_available.png";
+            echo '<td><a href="Film.php?id=' . $donnee["idFilm"] . '"><img title="' . $donnee['titre'] . '" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="' . $donnee['image'] . '"></a></a><h5>' . $donnee['titre'] . '</h5></td>';
+            $i++;}
         echo '</table>';
     }
     ?>

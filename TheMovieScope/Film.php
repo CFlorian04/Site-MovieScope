@@ -43,7 +43,7 @@ while ( $donnee = $rep->fetch() ) {
     echo '<td><h1>' . $donnee['titre'] . '</h1></td>';
     echo '<td  width="450" rowspan="5">' . utf8_encode($donnee['resume']) . '</td></tr>';
     echo '<tr><td>' . $donnee['annee'] . ' - ' . $donnee['libelle'] . '</td></tr>';
-    echo '<p><td>Réalisateur : ' . $donnee[11] . " " . $donnee[10] . '</td></p>';
+    echo '<td>Réalisateur : <a href="Artiste.php?id='.$donnee['idArtiste'].'">' . $donnee[11] . " " . $donnee[10] . '</a></td>';
     if ($_SESSION['admin'] == 1) {
         echo '<tr><td><a href="Suppression.php?id=' . $donnee['idFilm'] . '&genre=film"><button id="bouton">Supprimer</button></a><br>';
         echo '<a href="Modification.php?id=' . $donnee['idFilm'] . '&film=' . $donnee['titre'] . '&genre=film&date=' . $donnee['annee'] . '&type=' . $donnee['libelle'] . '&artiste=' . $donnee['prenom'] . " " . $donnee['nom'] . '&resume=' . urlencode($donnee['resume']) . '&image=' . $donnee[6] . '"><button id="bouton">Modifier</button></a></td></tr>';
@@ -70,13 +70,24 @@ while ( $donnee = $rep->fetch() ) {
 //affichage des avis
     echo '<div><th colspan="2">AVIS</th>';
     $rep = $bdd->query('SELECT * FROM cinema.film LEFT JOIN  cinema.noter ON idFilm=Film_idFilm  LEFT JOIN cinema.internaute ON idInternaute=Internaute_idInternaute WHERE idFilm=' . $id . ' ;');
+    $com = false;
     while ( $donnee = $rep->fetch() ) {
         if ($donnee['commentaire'] != NULL) {
-            echo '<tr><td><strong>' . $donnee['nom'] . " " . $donnee['prenom'] . '<p></p>' . $donnee['note'] . '/10</strong></td><td>' . utf8_encode($donnee['commentaire']) . '</td></tr></div>';
+            echo '<tr><td><strong>' . $donnee['nom'] . " " . $donnee['prenom'] . '<p></p>' . $donnee['note'] . '/10</strong></td><td>' . utf8_encode($donnee['commentaire']);
+            if($_SESSION['donnee']['idInternaute'] == $donnee['Internaute_idInternaute'])
+                echo '<td><a href="Suppression.php?id=' . $donnee['Internaute_idInternaute'] . '&idFilm=' . $id . '&genre=commentaire"><button id="bouton">Supprimer</button></a>';
+            echo '</td></tr></div>';
+        }
+
+        if($_SESSION['donnee']['idInternaute'] == $donnee['Internaute_idInternaute'] && $donnee['idFilm'] == $donnee['Film_idFilm'])
+        {
+           $com = true;
         }
     }
-    if ($_SESSION['admin'] == 0) {
+    if($com == false)
         echo '<tr><td><a href="Noter.php?id=' . $id . '"><button>Commenter</button></a></td>';
-    }
+
+
+
     echo '</table>';
 }

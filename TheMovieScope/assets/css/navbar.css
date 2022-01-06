@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
     margin: 0;
@@ -7,6 +6,7 @@
     font-family: 'Poppins', cursive;
     color: #ffffff;
 }
+
 body{
     min-height: 100vh;
 }
@@ -36,6 +36,7 @@ nav .navbar{
     font-size: 30px;
     color: #fff;
     text-decoration: none;
+    font-family: Palatino, URW Palladio L, serif;
     font-weight: 600;
 }
 nav .navbar .nav-links{
@@ -211,8 +212,6 @@ nav .navbar .links li:hover .js-sub-menu{
     }
 }
 
-
-
 li button{
     background-color: #313136 ;
     border: none;
@@ -220,14 +219,17 @@ li button{
     height: 100%;
     font-size: 15px;
     font-weight: 500;
+    cursor : pointer;
+}
+
+li a {
+    cursor: pointer;
 }
 
 button
 {
     border: none;
 }
-
-
 
 table {
     margin-left: 45px;
@@ -241,6 +243,20 @@ table td h5 {
     text-align: center;
 }
 
-input, select, option, button{
+input, select, option, textarea{
     color: #000000;
+}
+
+input[type=button],a button{
+    background: #000000;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #ffffff;
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.5em 0.5em;
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
 }

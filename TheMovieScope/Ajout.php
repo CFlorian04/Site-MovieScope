@@ -29,6 +29,14 @@
     <div id="modif_div">
 
         <?php
+
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+        }
+        catch (Exception $e) {
+            die('Erreur de connexion : ' . $e->getMessage());
+        }
+
         //Si la modification est un film
         if ($_GET['action'] === "film") {
             echo '<div>
@@ -44,12 +52,7 @@
                 <td><label>Genre</label></td>
                 <td ><select name="genre">';
 
-            try {
-                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-            }
-            catch (Exception $e) {
-                die('Erreur de connexion : ' . $e->getMessage());
-            }
+
             $rep = $bdd->query('SELECT * FROM cinema.genre;');
             while ( $donnee = $rep->fetch() ) {
                 echo('<option name="genre" value="' . $donnee['idGenre'] . '">' . $donnee['libelle'] . '</option>');
@@ -61,12 +64,6 @@
                 <td><label>Artiste</label></td>
                 <td ><select name="artiste">';
 
-            try {
-                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-            }
-            catch (Exception $e) {
-                die('Erreur de connexion : ' . $e->getMessage());
-            }
             $rep = $bdd->query('SELECT * FROM cinema.artiste;');
             while ( $donnee = $rep->fetch() ) {
                 echo('<option name="artiste" value="' . $donnee['idArtiste'] . '">' . $donnee['prenom'] . ' ' . $donnee['nom'] . '</option>');
@@ -87,14 +84,9 @@
                 $annee   = $_POST['annee'];
                 $Artiste = $_POST['artiste'];
                 $Genre  = $_POST['genre'];
-                $resume = $_POST['resume'];
+                $resume = utf8_decode($_POST['resume']);
                 $image  = $_POST['image'];
-                try {
-                    $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-                }
-                catch (Exception $e) {
-                    die('Erreur de connexion : ' . $e->getMessage());
-                }
+
 //preparation de la requête avec les variables $_POST du formulaire
                 $req = $bdd->prepare('INSERT INTO film (titre, annee,resume, Artiste_idRealisateur, Genre_idGenre,image) VALUES (?,?,?,?,?,?);');
                 $req->execute([$titre, $annee, $resume, $Artiste, $Genre, $image]) or die(print_r($req->errorInfo()));
@@ -119,12 +111,7 @@
 </div>';
             if (isset($_POST['libelle'])) {
                 $libelle = $_POST['libelle'];
-                try {
-                    $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-                }
-                catch (Exception $e) {
-                    die('Erreur de connexion : ' . $e->getMessage());
-                }
+
 //preparation de la requête avec les variables $_POST du formulaire
                 $req = $bdd->prepare('INSERT INTO genre (libelle) VALUES (?);');
                 $req->execute([$libelle]) or die(print_r($req->errorInfo()));
@@ -160,12 +147,7 @@
                 $nom    = $_POST['nom'];
                 $prenom = $_POST['prenom'];
                 $date   = $_POST['date'];
-                try {
-                    $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-                }
-                catch (Exception $e) {
-                    die('Erreur de connexion : ' . $e->getMessage());
-                }
+
 //preparation de la requête avec les variables $_POST du formulaire
                 $req = $bdd->prepare('INSERT INTO artiste (nom,prenom,dateNaiss) VALUES (?,?,?);');
                 $req->execute([$nom, $prenom, $date]) or die(print_r($req->errorInfo()));

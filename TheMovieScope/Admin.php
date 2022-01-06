@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Redirection vers la page appropriée
 if (isset($_SESSION['admin'])) {
     if ($_SESSION['admin'] == 0) {
         header('location:Internaute.php');
@@ -8,7 +9,7 @@ if (isset($_SESSION['admin'])) {
 else
     header('location:Index.php');
 
-//Permet de rediriger vers le menu précedent en cas de changement de page
+//Permet de rediriger vers le menu précédent en cas de changement de page
 if (isset($_GET['menu']))
     $menu = $_GET['menu'];
 else
@@ -65,6 +66,7 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
                 </li>
                 <li><a href="Profil.php">Profil</a></li>
                 <li><a href="Index.php">Déconnexion</a></li>
+                <li><a href="APropos.php">À propos</li>
             </ul>
         </div>
         <div class="logo"><a><img src="assets/img/logo_TheMovieScope_HD.png" width="125" height="70"/></a></div>
@@ -94,6 +96,23 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
         if ($donnee['image'] == null)
             $donnee['image'] = "assets/img/no_image_available.png";
 
+        $ti = 25;
+        if(strlen($donnee['titre']) >= $ti)
+        {
+            $donnee['titre'][$ti-4] = " ";
+            for($k = $ti-3; $k<$ti; $k++)
+            {
+                $donnee['titre'][$k] = ".";
+            }
+
+            for($k = $ti; $k < strlen($donnee['titre']); $k++)
+            {
+                $donnee['titre'][$k] = null;
+            }
+
+        }
+
+
         //Affichage des affiches de films avec un lien cliquable et leurs noms
         echo '<td><a href="Film.php?id=' . $donnee["idFilm"] . '"><img title="' . $donnee['titre'] . '" alt="Ce film ne possède pas d\'illustration" height="200px" width="150px" src="' . $donnee['image'] . '"></a><h5>' . $donnee['titre'] . '</h5></td>';
         $i++;
@@ -115,7 +134,7 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
         if ($donnee['image'] == null)
             $donnee['image'] = "assets/img/no_image_available.png";
         //Affichage des photos des artistes avec un lien cliquable et leurs noms
-        echo '<td><a href="Artiste.php?id=' . $donnee["idArtiste"] . '"><img title="' . $donnee['prenom'] . " " . $donnee['nom'] . '" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="' . $donnee['image'] . '"></a><h5>' . $donnee['prenom'] . " " . $donnee['nom'] . '</h5></td>';
+        echo '<td><a href="Artiste.php?id=' . $donnee["idArtiste"] . '"><img title="' . $donnee['prenom'] . " " . $donnee['nom'] . '" alt="Cet artiste ne possède pas d\'illustration" height="125px" width="100px" src="' . $donnee['image'] . '"></a><h5>' . $donnee['prenom'][0] . ". " . $donnee['nom'] . '</h5></td>';
         $i++;
     }
     echo '</table>';
@@ -149,7 +168,10 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
     while ( $donnee = $rep->fetch() ) {
         echo '<tr><td>' . $donnee['nom'] . '</td>';
         echo '<td>' . $donnee['prenom'] . '</td>';
-        echo '<td>' . $donnee['admin'] . '</td>';
+        if($donnee['admin'] == 1)
+            echo '<td>Oui</td>';
+        else
+            echo '<td>Non</td>';
         echo '<td><a href="Suppression.php?id=' . $donnee['idInternaute'] . '&genre=internautes"><button>Supprimer</button></a></td>';
         echo '<td><a href="Modification.php?id=' . $donnee['idInternaute'] . '&nom=' . $donnee['nom'] . '&prenom=' . $donnee['prenom'] . '&admin=' . $donnee['admin'] . '&genre=internautes"><button>Modifier</button></a></td></tr>';
     }
