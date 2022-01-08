@@ -137,6 +137,7 @@ if (isset($_SESSION['admin'])) {
         $nom    = $_GET['nom'];
         $date   = $_GET['date'];
         $prenom = $_GET['prenom'];
+        $image =$_GET['image'];
         echo '<a href="Artiste.php?id=' . $id . '">Retour</a>';
         echo '<div>
     <form action="Modification.php?id=' . $id . '&genre=artiste" method="post">
@@ -153,6 +154,10 @@ if (isset($_SESSION['admin'])) {
                 <td><label>Date de naissance</label></td>
                 <td ><input name="date" type="date" value="' . $date . '"></td>
             </tr>
+            <tr>
+                <td><label>Image</label></td>
+                <td><input type="url" value="' . $image . '" name="image"></td>
+            </tr>
             <td><input type="button" value="Modifier" onclick="this.form.submit()"></td>
             </tr>
         </table>
@@ -162,9 +167,10 @@ if (isset($_SESSION['admin'])) {
             $nom    = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $date   = $_POST['date'];
-            $req    = $bdd->prepare('UPDATE artiste SET nom = ?, prenom = ?, dateNaiss = ? WHERE (`idArtiste` = ?);');
-            $req->execute([$nom, $prenom, $date, $id]) or die(print_r($req->errorInfo()));
-            header('Location: Admin.php?menu=artiste');
+            $image = $_POST['image'];
+            $req    = $bdd->prepare('UPDATE artiste SET nom = ?, prenom = ?, dateNaiss = ?,image=? WHERE (`idArtiste` = ?);');
+            $req->execute([$nom, $prenom, $date,$image, $id]) or die(print_r($req->errorInfo()));
+            header('Location: Artiste.php?id='.$id.'');
         }
     }
 

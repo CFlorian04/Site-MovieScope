@@ -142,7 +142,7 @@ echo '<div id="menu" style="display: none">' . $menu . '</div>'
 
                 for($k = $ti; $k < strlen($donnee['titre']); $k++)
                 {
-                    $donnee['titre'][$k] = null;
+                    $donnee['titre'][$k] = " ";
                 }
 
             }

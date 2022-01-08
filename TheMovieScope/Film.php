@@ -48,6 +48,8 @@ while ( $donnee = $rep->fetch() ) {
         echo '<tr><td><a href="Suppression.php?id=' . $donnee['idFilm'] . '&genre=film"><button id="bouton">Supprimer</button></a><br>';
         echo '<a href="Modification.php?id=' . $donnee['idFilm'] . '&film=' . $donnee['titre'] . '&genre=film&date=' . $donnee['annee'] . '&type=' . $donnee['libelle'] . '&artiste=' . $donnee['prenom'] . " " . $donnee['nom'] . '&resume=' . urlencode($donnee['resume']) . '&image=' . $donnee[6] . '"><button id="bouton">Modifier</button></a></td></tr>';
     }
+    else
+        echo '<tr><td></td></tr>';
 
     //Affichage des notes moyennes des internautes
     echo '<tr><td>NOTE TOTAL : ';

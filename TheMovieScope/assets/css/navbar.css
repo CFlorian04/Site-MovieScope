@@ -237,6 +237,8 @@ table {
 
 table td {
     padding: 10px;
+    max-width: 350px;
+
 }
 
 table td h5 {

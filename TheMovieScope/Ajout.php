@@ -83,9 +83,9 @@
                 $titre   = $_POST['titre'];
                 $annee   = $_POST['annee'];
                 $Artiste = $_POST['artiste'];
-                $Genre  = $_POST['genre'];
-                $resume = utf8_decode($_POST['resume']);
-                $image  = $_POST['image'];
+                $Genre   = $_POST['genre'];
+                $resume  = utf8_decode($_POST['resume']);
+                $image   = $_POST['image'];
 
 //preparation de la requête avec les variables $_POST du formulaire
                 $req = $bdd->prepare('INSERT INTO film (titre, annee,resume, Artiste_idRealisateur, Genre_idGenre,image) VALUES (?,?,?,?,?,?);');
@@ -127,30 +127,35 @@
         <table>
             <tr>
                 <td><label>Nom</label></td>
-                <td ><input name="nom"></td>
+                <td><input name="nom"></td>
             </tr>
             <tr>
                 <td><label>Prenom</label></td>
-                <td ><input name="prenom"></td>
+                <td><input name="prenom"></td>
             </tr>
             <tr>
                 <td><label>Date de naissance</label></td>
-                <td ><input name="date" type="date"></td>
+                <td><input name="date" type="date"></td>
+            </tr>
+            <tr>
+                <td><label>Image</label></td>
+                <td><input type="url" name="image"></td>
             </tr>
             <td><input type="button" value="Ajouter" onclick="this.form.submit()"></td>
             </tr>
         </table>
     </form>
 </div>';
-            if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['date'])) {
+            if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['date']) && isset($_POST['image'])) {
 
                 $nom    = $_POST['nom'];
                 $prenom = $_POST['prenom'];
                 $date   = $_POST['date'];
+                $image   = $_POST['image'];
 
 //preparation de la requête avec les variables $_POST du formulaire
-                $req = $bdd->prepare('INSERT INTO artiste (nom,prenom,dateNaiss) VALUES (?,?,?);');
-                $req->execute([$nom, $prenom, $date]) or die(print_r($req->errorInfo()));
+                $req = $bdd->prepare('INSERT INTO artiste (nom,prenom,dateNaiss,image) VALUES (?,?,?,?);');
+                $req->execute([$nom, $prenom, $date, $image]) or die(print_r($req->errorInfo()));
                 header('Location: Admin.php?menu=artiste');
             }
         }

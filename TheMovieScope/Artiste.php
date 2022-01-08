@@ -50,7 +50,7 @@
         //Affichage des boutons pour l'admin
         if ($_SESSION['admin'] == 1) {
             echo '  <td><a href="Suppression.php?id=' . $donnee['idArtiste'] . '&genre=artiste"><button>Supprimer</button></a></td>
-                <td><a href="Modification.php?id=' . $donnee['idArtiste'] . '&genre=artiste&nom=' . $donnee['nom'] . '&prenom=' . $donnee['prenom'] . '&date=' . $donnee['dateNaiss'] . '"><button>Modifier</button></a></td>';
+                <td><a href="Modification.php?id=' . $donnee['idArtiste'] . '&genre=artiste&nom=' . $donnee['nom'] . '&prenom=' . $donnee['prenom'] . '&date=' . $donnee['dateNaiss'] . '&image=' . $donnee['image'] .'"><button>Modifier</button></a></td>';
         }
     }
 
