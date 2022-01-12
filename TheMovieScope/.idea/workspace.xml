@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0954ae96-4153-4348-9b82-1b183a4802fe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../A LIRE - Instruction.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cinema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APropos.php" beforeDir="false" afterPath="$PROJECT_DIR$/APropos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/Admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ajout.php" beforeDir="false" afterPath="$PROJECT_DIR$/Ajout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Artiste.php" beforeDir="false" afterPath="$PROJECT_DIR$/Artiste.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Creation.php" beforeDir="false" afterPath="$PROJECT_DIR$/Creation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Film.php" beforeDir="false" afterPath="$PROJECT_DIR$/Film.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Internaute.php" beforeDir="false" afterPath="$PROJECT_DIR$/Internaute.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modification.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noter.php" beforeDir="false" afterPath="$PROJECT_DIR$/Noter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profil.php" beforeDir="false" afterPath="$PROJECT_DIR$/Profil.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Suppression.php" beforeDir="false" afterPath="$PROJECT_DIR$/Suppression.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Traitement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Traitement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bootstrap/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/Index.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/Index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/Login-Form-Dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/Login-Form-Dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/ionicons.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/fonts/ionicons.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/ionicons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/fonts/ionicons.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Affichage.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Affichage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/formulaire.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/formulaire.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="WAMP PHP" />
+  <component name="ProjectId" id="23bDy45DJcD5e1gWMwiPsMs7cwz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="C:/wamp64/bin/php/php7.4.9/zend_ext/php_xdebug-2.9.6-7.4-vc15-x86_64.dll" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0954ae96-4153-4348-9b82-1b183a4802fe" name="Changes" comment="" />
+      <created>1641994145223</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1641994145223</updated>
+      <workItem from="1641994146489" duration="596000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
